@@ -1,0 +1,47 @@
+<div class="main">
+  <div class="button-row">
+    <button mat-button>Modifier</button>
+    <button mat-button>Visualiser</button>
+    <button mat-button (click)="saveSVG()">Exporter</button>
+  </div>
+  <div class="pliego-container">
+    <svg version="1.1" baseProfile="full" viewBox="0 0 740 1050" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" #pliegoSVG>
+
+      <defs>
+          <style>
+            {{b64Fonts}}
+          </style>
+      </defs>
+
+      <image href="assets/bg.jpg" height="1050" width="740"/>
+
+      <text class="number" x="50%" y="100px" text-anchor="middle" text-anchor="middle"
+        font-family="'Bodoni Moda', serif" font-size="1.2em" opacity="0.75" fill="#2e1900">N° 10.</text>
+
+      <text class="title-1" x="50%" y="600px" text-anchor="middle" text-anchor="middle"
+        font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bolder" letter-spacing="0.67em"
+        opacity="0.75" fill="#2e1900">HISTORIA</text>
+
+      <text class="title-2" x="50%" y="644px" text-anchor="middle" text-anchor="middle"
+        font-family="'Bodoni Moda', serif" font-weight="normal" font-size="1.5em"
+        opacity="0.75" fill="#2e1900">DEL MUY NOBLE Y ESFORZADO CABALLERO</text>
+
+      <text class="title-3" x="50%" y="705px" text-anchor="middle" text-anchor="middle"
+        font-family="'Bodoni Moda', serif" font-size="3em" font-weight="bolder"
+        opacity="0.75" fill="#2e1900">EL CONDE PARTINUPLES</text>
+
+      <text class="title-4" x="50%" y="760px" text-anchor="middle" text-anchor="middle"
+        font-family="'Bodoni Moda', serif" font-size="1.8em" font-weight="normal"
+        opacity="0.75" fill="#2e1900">EMPERADOR DE CONSTANTINOPLA</text>
+
+      <text class="license" x="50%" y="995px" text-anchor="middle" text-anchor="middle"
+        font-family="'Bodoni Moda', serif" font-size="1.2em" font-weight="lighter" opacity="0.75" fill="#2e1900">
+        <tspan x="50%" class="place" text-anchor="middle">À Genève</tspan>
+        <tspan x="50%" class="address" text-anchor="middle" dy="1.5em"
+          font-size="0.9em">
+          Chez Georges, impr. & libraire, Boulevard Carl-Vogt Num. 66.
+        </tspan>
+      </text>
+    </svg>
+  </div>
+</div>

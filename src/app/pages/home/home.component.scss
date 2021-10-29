@@ -1,0 +1,17 @@
+.main {
+  max-width: 420px;
+  margin: 0 auto;
+
+  .button-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    button {
+      flex-grow: 1;
+    }
+  }
+
+  .pliego-container {
+  }
+}
