@@ -1,47 +1,118 @@
-<div class="main">
-  <div class="button-row">
-    <button mat-button>Modifier</button>
-    <button mat-button>Visualiser</button>
-    <button mat-button (click)="saveSVG()">Exporter</button>
+<mat-drawer-container autosize>
+
+  <mat-drawer #drawer mode="over">
+    <div class="form-drawer">
+      <mat-form-field>
+        <mat-label>Ligne 1</mat-label>
+        <input matInput [(ngModel)]="pliego.line1" name="line1" maxlength="18">
+        <button *ngIf="pliego.line1" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line1=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Ligne 2</mat-label>
+        <input matInput [(ngModel)]="pliego.line2" name="line2" maxlength="48">
+        <button *ngIf="pliego.line2" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line2=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Ligne 3</mat-label>
+        <input matInput [(ngModel)]="pliego.line3" name="line3" maxlength="23">
+        <button *ngIf="pliego.line3" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line3=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Ligne 4</mat-label>
+        <input matInput [(ngModel)]="pliego.line4" name="line4" maxlength="39">
+        <button *ngIf="pliego.line4" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line4=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Imprimeur</mat-label>
+        <input matInput [(ngModel)]="pliego.printer" name="printer" maxlength="22">
+        <button *ngIf="pliego.printer" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.printer=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <div class="submit">
+        <button mat-raised-button (click)="switchMode('edit')">Visualiser</button>
+      </div>
+    </div>
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    
+    <div class="main">
+      <div class="button-row">
+        <button mat-button (click)="switchMode('edit')">Modifier</button>
+        <button mat-button (click)="saveSVG()">Exporter</button>
+      </div>
+      <div class="pliego-container">
+        <svg version="1.1" baseProfile="full" viewBox="0 0 740 1050" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" #pliegoSVG>
+
+          <defs>
+              <style>
+                {{b64Fonts}}
+              </style>
+          </defs>
+          
+          <g [ngClass]="mode">
+            
+          <image *ngIf="b64Bg" attr.xlink:href="data:image/jpg;base64,{{b64Bg}}" height="1050" width="740"/>
+
+          <text class="number" x="90%" y="100px" text-anchor="end"
+            font-family="'Bodoni Moda', serif" font-size="1.2em" opacity="0.75" fill="#2e1900">N° 10.</text>
+
+          <text id="title-1" x="50%" y="600px" text-anchor="middle"
+            font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bolder" letter-spacing="0.67em"
+            opacity="0.75" fill="#2e1900">{{pliego.line1}}</text>
+
+          <text class="title-2" x="50%" y="644px" text-anchor="middle"
+            font-family="'Bodoni Moda', serif" font-weight="normal" font-size="1.5em"
+            opacity="0.75" fill="#2e1900">{{pliego.line2}}</text>
+
+          <text class="title-3" x="50%" y="705px" text-anchor="middle"
+            font-family="'Bodoni Moda', serif" font-size="3em" font-weight="bolder"
+            opacity="0.75" fill="#2e1900">{{pliego.line3}}</text>
+
+          <text class="title-4" x="50%" y="760px" text-anchor="middle"
+            font-family="'Bodoni Moda', serif" font-size="1.8em" font-weight="normal" font-style="italic"
+            opacity="0.75" fill="#2e1900">{{pliego.line4}}</text>
+
+          <text class="license" x="50%" y="995px" text-anchor="middle"
+            font-family="'Bodoni Moda', serif" font-size="1.5em" font-weight="lighter" opacity="0.75" fill="#2e1900">
+            <tspan x="50%" class="place" text-anchor="middle">À Genève</tspan>
+            <tspan x="50%" class="address" text-anchor="middle" dy="1.5em"
+              font-size="0.9em">
+              Chez {{pliego.printer}}, impr. & libraire, Boulevard Carl-Vogt Num. 66.
+            </tspan>
+          </text>
+          
+          <image *ngIf="b64Imgs[pliego.images[0]]" attr.xlink:href="data:image/png;base64,{{b64Imgs[pliego.images[0]]}}"
+            transform="translate(-120 -120)"
+            width="240"
+            height="240"
+            x="123"
+            y="350"/>
+          <image *ngIf="b64Imgs[pliego.images[1]]" attr.xlink:href="data:image/png;base64,{{b64Imgs[pliego.images[1]]}}"
+            transform="translate(-120 -120)"
+            width="240"
+            height="240"
+            x="370"
+            y="350"/>
+          <image *ngIf="b64Imgs[pliego.images[2]]" attr.xlink:href="data:image/png;base64,{{b64Imgs[pliego.images[2]]}}"
+            transform="translate(-120 -120)"
+            width="240"
+            height="240"
+            x="617"
+            y="350"/>
+          </g>
+          
+        </svg>
+      </div>
+    </div>
   </div>
-  <div class="pliego-container">
-    <svg version="1.1" baseProfile="full" viewBox="0 0 740 1050" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" #pliegoSVG>
-
-      <defs>
-          <style>
-            {{b64Fonts}}
-          </style>
-      </defs>
-
-      <image href="assets/bg.jpg" height="1050" width="740"/>
-
-      <text class="number" x="50%" y="100px" text-anchor="middle" text-anchor="middle"
-        font-family="'Bodoni Moda', serif" font-size="1.2em" opacity="0.75" fill="#2e1900">N° 10.</text>
-
-      <text class="title-1" x="50%" y="600px" text-anchor="middle" text-anchor="middle"
-        font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bolder" letter-spacing="0.67em"
-        opacity="0.75" fill="#2e1900">HISTORIA</text>
-
-      <text class="title-2" x="50%" y="644px" text-anchor="middle" text-anchor="middle"
-        font-family="'Bodoni Moda', serif" font-weight="normal" font-size="1.5em"
-        opacity="0.75" fill="#2e1900">DEL MUY NOBLE Y ESFORZADO CABALLERO</text>
-
-      <text class="title-3" x="50%" y="705px" text-anchor="middle" text-anchor="middle"
-        font-family="'Bodoni Moda', serif" font-size="3em" font-weight="bolder"
-        opacity="0.75" fill="#2e1900">EL CONDE PARTINUPLES</text>
-
-      <text class="title-4" x="50%" y="760px" text-anchor="middle" text-anchor="middle"
-        font-family="'Bodoni Moda', serif" font-size="1.8em" font-weight="normal"
-        opacity="0.75" fill="#2e1900">EMPERADOR DE CONSTANTINOPLA</text>
-
-      <text class="license" x="50%" y="995px" text-anchor="middle" text-anchor="middle"
-        font-family="'Bodoni Moda', serif" font-size="1.2em" font-weight="lighter" opacity="0.75" fill="#2e1900">
-        <tspan x="50%" class="place" text-anchor="middle">À Genève</tspan>
-        <tspan x="50%" class="address" text-anchor="middle" dy="1.5em"
-          font-size="0.9em">
-          Chez Georges, impr. & libraire, Boulevard Carl-Vogt Num. 66.
-        </tspan>
-      </text>
-    </svg>
-  </div>
-</div>
+</mat-drawer-container>

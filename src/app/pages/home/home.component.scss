@@ -1,3 +1,16 @@
+mat-drawer {
+  width: 50%;
+  text-align: center;
+}
+
+mat-form-field{
+    width: 80%;
+}
+
+.form-drawer{
+  padding: 1.2rem;
+}
+
 .main {
   max-width: 420px;
   margin: 0 auto;
@@ -13,5 +26,10 @@
   }
 
   .pliego-container {
+    .edit{
+      .editable{
+        outline: 3px solid red;
+      }
+    }
   }
 }
