@@ -2,39 +2,75 @@
 
   <mat-drawer #drawer mode="over">
     <div class="form-drawer">
-      <mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Image 1</mat-label>
+        <mat-select [(ngModel)]="pliego.images[0]" (ngModelChange)="changeB64Img()">
+          <mat-option>Aucun</mat-option>
+          <mat-option *ngFor="let b64Img of b64Imgs" value="{{b64Img.key}}">
+            {{b64Img.label}}
+          </mat-option>
+        </mat-select>
+        <button *ngIf="pliego.images[0]" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.images[0]='';changeB64Img()">
+          <mat-icon>highlight_off</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Image 2</mat-label>
+        <mat-select [(ngModel)]="pliego.images[1]" (ngModelChange)="changeB64Img()">
+          <mat-option>Aucun</mat-option>
+          <mat-option *ngFor="let b64Img of b64Imgs" value="{{b64Img.key}}">
+            {{b64Img.label}}
+          </mat-option>
+        </mat-select>
+        <button *ngIf="pliego.images[1]" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.images[1]='';changeB64Img()">
+          <mat-icon>highlight_off</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Image 3</mat-label>
+        <mat-select [(ngModel)]="pliego.images[2]" (ngModelChange)="changeB64Img()">
+          <mat-option>Aucun</mat-option>
+          <mat-option *ngFor="let b64Img of b64Imgs" value="{{b64Img.key}}">
+            {{b64Img.label}}
+          </mat-option>
+        </mat-select>
+        <button *ngIf="pliego.images[2]" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.images[2]='';changeB64Img()">
+          <mat-icon>highlight_off</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Ligne 1</mat-label>
         <input matInput [(ngModel)]="pliego.line1" name="line1" maxlength="18">
         <button *ngIf="pliego.line1" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line1=''">
-          <mat-icon>close</mat-icon>
+          <mat-icon>highlight_off</mat-icon>
         </button>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Ligne 2</mat-label>
         <input matInput [(ngModel)]="pliego.line2" name="line2" maxlength="48">
         <button *ngIf="pliego.line2" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line2=''">
-          <mat-icon>close</mat-icon>
+          <mat-icon>highlight_off</mat-icon>
         </button>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Ligne 3</mat-label>
         <input matInput [(ngModel)]="pliego.line3" name="line3" maxlength="23">
         <button *ngIf="pliego.line3" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line3=''">
-          <mat-icon>close</mat-icon>
+          <mat-icon>highlight_off</mat-icon>
         </button>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Ligne 4</mat-label>
         <input matInput [(ngModel)]="pliego.line4" name="line4" maxlength="39">
         <button *ngIf="pliego.line4" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line4=''">
-          <mat-icon>close</mat-icon>
+          <mat-icon>highlight_off</mat-icon>
         </button>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Imprimeur</mat-label>
         <input matInput [(ngModel)]="pliego.printer" name="printer" maxlength="22">
         <button *ngIf="pliego.printer" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.printer=''">
-          <mat-icon>close</mat-icon>
+          <mat-icon>highlight_off</mat-icon>
         </button>
       </mat-form-field>
       <div class="submit">
@@ -44,11 +80,11 @@
   </mat-drawer>
 
   <div class="sidenav-content">
-    
+        
     <div class="main">
       <div class="button-row">
         <button mat-button (click)="switchMode('edit')">Modifier</button>
-        <button mat-button (click)="saveSVG()">Exporter</button>
+        <button mat-button (click)="saveSVG()">Sauvegarder</button>
       </div>
       <div class="pliego-container">
         <svg version="1.1" baseProfile="full" viewBox="0 0 740 1050" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" #pliegoSVG>
@@ -91,19 +127,19 @@
             </tspan>
           </text>
           
-          <image *ngIf="b64Imgs[pliego.images[0]]" attr.xlink:href="data:image/png;base64,{{b64Imgs[pliego.images[0]]}}"
+          <image *ngIf="displayImgs[0]" attr.xlink:href="data:image/png;base64,{{displayImgs[0]}}"
             transform="translate(-120 -120)"
             width="240"
             height="240"
             x="123"
             y="350"/>
-          <image *ngIf="b64Imgs[pliego.images[1]]" attr.xlink:href="data:image/png;base64,{{b64Imgs[pliego.images[1]]}}"
+          <image *ngIf="displayImgs[1]" attr.xlink:href="data:image/png;base64,{{displayImgs[1]}}"
             transform="translate(-120 -120)"
             width="240"
             height="240"
             x="370"
             y="350"/>
-          <image *ngIf="b64Imgs[pliego.images[2]]" attr.xlink:href="data:image/png;base64,{{b64Imgs[pliego.images[2]]}}"
+          <image *ngIf="displayImgs[2]" attr.xlink:href="data:image/png;base64,{{displayImgs[2]}}"
             transform="translate(-120 -120)"
             width="240"
             height="240"

@@ -23,8 +23,9 @@ export class HomeComponent implements OnInit {
   mode: string = "visualize";
   b64Fonts: string = "";
   b64Bg: string = "";
-  b64Imgs: any = {};
+  b64Imgs: any[] = [];
   pliego = new Pliego();
+  displayImgs: string[] = [];
   @ViewChild('drawer', { static: false }) drawer!: MatDrawer;
   @ViewChild('pliegoSVG', { static: false }) svg: any;
   @ViewChild('canvas', { static: false }) canvas: any;
@@ -42,8 +43,10 @@ export class HomeComponent implements OnInit {
     );
     this.b64.getImgsBase64().subscribe(b64Imgs => {
       this.b64.imgs.forEach((img, index) => {
-        this.b64Imgs[this.b64.imgs[index]] = b64Imgs[index];
+        img.b64 = b64Imgs[index];
+        this.b64Imgs.push(img);
       });
+      this.changeB64Img();
     });
   }
 
@@ -72,6 +75,17 @@ export class HomeComponent implements OnInit {
       });
     };
     image.src = blobURL;
+  }
+
+  changeB64Img() {
+    this.pliego.images.forEach((key, index) => {
+      let tmp = this.b64Imgs.find(obj => obj.key === key);
+      if (tmp !== undefined) {
+        this.displayImgs[index] = tmp.b64;
+      } else {
+        this.displayImgs[index] = '';
+      }
+    });
   }
 
 }
