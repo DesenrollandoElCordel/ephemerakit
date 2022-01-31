@@ -1,16 +1,17 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { MatDrawer } from '@angular/material/sidenav';
 
 import { saveAs } from 'file-saver';
 import { Base64Service } from '../../services/base64.service';
 
 export class Pliego {
-  line1: string = "HISTORIA";
-  line2: string = "DEL MUY NOBLE Y ESFORZADO CABALLERO";
-  line3: string = "EL CONDE PARTINUPLES";
-  line4: string = "EMPERADOR DE CONSTANTINOPLA";
+  line1: string = "VRAY DISCOURS";
+  line2: string = "de la miraculeuse délivrance envoyée de Dieu";
+  line3: string = "À LA VILLE DE GENÈVE";
+  line4: string = "le 12, jour de décembre, 1602";
   printer: string = "Georges";
-  images: Array<string> = ['femme_eventail', 'homme_danseur', 'femme_danseuse4'];
+  images: Array<string> = ['tour', 'homme_epee_chapeau', 'femmes_groupe'];
 }
 
 @Component({
@@ -23,15 +24,18 @@ export class HomeComponent implements OnInit {
   mode: string = "visualize";
   b64Fonts: string = "";
   b64Bg: string = "";
+  b64Frise: string = "";
   b64Imgs: any[] = [];
   pliego = new Pliego();
   displayImgs: string[] = [];
+  drawerWidth: string = '33%';
   @ViewChild('drawer', { static: false }) drawer!: MatDrawer;
   @ViewChild('pliegoSVG', { static: false }) svg: any;
   @ViewChild('canvas', { static: false }) canvas: any;
 
   constructor(
-    private b64: Base64Service
+    private b64: Base64Service,
+    public breakpointObserver: BreakpointObserver
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +45,9 @@ export class HomeComponent implements OnInit {
     this.b64.getBgBase64().subscribe(
       b64Bg => this.b64Bg = b64Bg
     );
+    this.b64.getFriseBase64().subscribe(
+      b64Frise => this.b64Frise = b64Frise
+    );
     this.b64.getImgsBase64().subscribe(b64Imgs => {
       this.b64.imgs.forEach((img, index) => {
         img.b64 = b64Imgs[index];
@@ -48,11 +55,23 @@ export class HomeComponent implements OnInit {
       });
       this.changeB64Img();
     });
+
+    this.breakpointObserver
+      .observe(['(min-width: 450px)'])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.drawerWidth = '33%';
+        } else {
+          this.drawerWidth = '100%';
+        }
+      });
   }
 
   switchMode(mode: string): void {
     this.mode = mode;
     this.drawer.toggle();
+    console.log(this.drawerWidth);
+
   }
 
   async saveSVG() {

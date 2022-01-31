@@ -11,6 +11,7 @@ export class Base64Service {
 
   private fontsBase64Url = 'assets/fonts.txt';
   private bgBase64Url = 'assets/bg.txt';
+  private friseBase64Url = 'assets/frise.txt';
   private imgBase64Url = 'assets/img/';
   public imgs: Array<any> = [
     { key: 'ane', label: 'Âne' },
@@ -69,6 +70,16 @@ export class Base64Service {
       responseType: 'text',
     };
     return this.http.get<string>(this.bgBase64Url, options)
+      .pipe(
+        catchError(this.handleError<string>('getBgBase64', ''))
+      );
+  }
+
+  getFriseBase64(): Observable<string> {
+    const options: Object = {
+      responseType: 'text',
+    };
+    return this.http.get<string>(this.friseBase64Url, options)
       .pipe(
         catchError(this.handleError<string>('getBgBase64', ''))
       );
