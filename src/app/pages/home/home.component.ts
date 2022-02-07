@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { MatDrawer } from '@angular/material/sidenav';
 
-import { saveAs } from 'file-saver';
 import { Base64Service } from '../../services/base64.service';
 
 export class Pliego {
@@ -27,7 +26,7 @@ export class HomeComponent implements OnInit {
   b64Frise: string = "";
   b64Imgs: any[] = [];
   pliego = new Pliego();
-  displayImgs: string[] = [];
+  displayImgs: any[] = [];
   drawerWidth: string = '33%';
   @ViewChild('drawer', { static: false }) drawer!: MatDrawer;
   @ViewChild('pliegoSVG', { static: false }) svg: any;
@@ -74,37 +73,73 @@ export class HomeComponent implements OnInit {
 
   }
 
-  async saveSVG() {
+  async savePNG() {
     let svgElement = this.svg.nativeElement;
     let { width, height } = svgElement.getBBox();
     let clonedSvgElement = svgElement.cloneNode(true);
-    let outerHTML = clonedSvgElement.outerHTML;
-    let blob = new Blob([outerHTML], { type: 'image/svg+xml;charset=utf-8' });
-    let URL = window.URL || window.webkitURL || window;
-    let blobURL = URL.createObjectURL(blob);
-    let image = new Image();
-    image.onload = () => {
-      let canvas = document.createElement('canvas');
-      canvas.width = width;
-      canvas.height = height;
-      let context = canvas.getContext('2d')!;
-      context.drawImage(image, 0, 0, width, height);
-      canvas.toBlob(function(blob) {
-        saveAs(blob!, "pliego.png");
-      });
+    let svgString = new XMLSerializer().serializeToString(clonedSvgElement);
+    let canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    let ctx = canvas.getContext("2d");
+    let DOMURL = self.URL || self.webkitURL || self;
+    let img = new Image();
+    let svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+    let url = DOMURL.createObjectURL(svg);
+    img.onload = function() {
+      ctx!.drawImage(img, 0, 0);
+      let png = document.createElement('a');
+      png.href = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+      png.download = 'MyPliegos.png';
+      png.click();
     };
-    image.src = blobURL;
+    img.src = url;
   }
 
   changeB64Img() {
     this.pliego.images.forEach((key, index) => {
       let tmp = this.b64Imgs.find(obj => obj.key === key);
       if (tmp !== undefined) {
-        this.displayImgs[index] = tmp.b64;
+        let i = new Image();
+        i.onload = () => {
+          tmp = Object.assign(tmp, this.getFiguresData(i, index))
+          this.displayImgs[index] = tmp;
+        };
+        i.src = 'data:image/png;base64,' + tmp.b64;
       } else {
         this.displayImgs[index] = '';
       }
     });
+  }
+
+  getFiguresData(img: HTMLImageElement, n: number) {
+    let maxWidth = 220;
+    let maxHeight = 300;
+    let yBottom = 440;
+    let xRef = 0;
+    let scale = maxWidth / img.width;
+    if (scale * img.height > maxHeight) {
+      scale = maxHeight / img.height;
+    }
+    let xOffset = 0.5 * scale * img.width;
+    let yOffset = scale * img.height;
+    switch (n) {
+      case 0:
+        xRef = 163;
+        break;
+      case 1:
+        xRef = 370;
+        break;
+      case 2:
+        xRef = 577;
+        break;
+    }
+    return {
+      x: Math.round(xRef - xOffset),
+      y: Math.round(yBottom - yOffset),
+      width: Math.round(img.width * scale),
+      height: Math.round(img.height * scale)
+    };
   }
 
 }
