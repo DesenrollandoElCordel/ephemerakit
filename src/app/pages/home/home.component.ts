@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { MatDrawer } from '@angular/material/sidenav';
 
 import { Base64Service } from '../../services/base64.service';
 
@@ -27,15 +25,12 @@ export class HomeComponent implements OnInit {
   b64Imgs: any[] = [];
   pliego = new Pliego();
   displayImgs: any[] = [];
-  drawerWidth: string = '33%';
   loaded: string[] = [];
-  @ViewChild('drawer', { static: false }) drawer!: MatDrawer;
   @ViewChild('pliegoSVG', { static: false }) svg: any;
   @ViewChild('canvas', { static: false }) canvas: any;
 
   constructor(
-    private b64: Base64Service,
-    public breakpointObserver: BreakpointObserver
+    private b64: Base64Service
   ) { }
 
   ngOnInit(): void {
@@ -59,23 +54,11 @@ export class HomeComponent implements OnInit {
       });
       this.changeB64Img();
     });
-
-    this.breakpointObserver
-      .observe(['(min-width: 450px)'])
-      .subscribe((state: BreakpointState) => {
-        if (state.matches) {
-          this.drawerWidth = '33%';
-        } else {
-          this.drawerWidth = '100%';
-        }
-      });
   }
 
   switchMode(mode: string): void {
     this.mode = mode;
-    this.drawer.toggle();
-    console.log(this.drawerWidth);
-
+    console.log(this.mode);
   }
 
   async savePNG() {
@@ -95,7 +78,7 @@ export class HomeComponent implements OnInit {
       ctx!.drawImage(img, 0, 0);
       let png = document.createElement('a');
       png.href = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
-      png.download = 'MyPliegos.png';
+      png.download = 'MyPliego.png';
       png.click();
     };
     img.src = url;

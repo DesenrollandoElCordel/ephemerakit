@@ -1,161 +1,76 @@
-<mat-drawer-container autosize>
-
-  <mat-drawer #drawer mode="over" [style.width]="drawerWidth">
-    <div class="form-drawer">
-      <mat-form-field appearance="outline">
-        <mat-label>Image 1</mat-label>
-        <mat-select [(ngModel)]="pliego.images[0]" (ngModelChange)="changeB64Img()">
-          <mat-option>Aucun</mat-option>
-          <mat-option *ngFor="let b64Img of b64Imgs" value="{{b64Img.key}}">
-            {{b64Img.label}}
-          </mat-option>
-        </mat-select>
-        <button *ngIf="pliego.images[0]" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.images[0]='';changeB64Img()">
-          <mat-icon>highlight_off</mat-icon>
-        </button>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Image 2</mat-label>
-        <mat-select [(ngModel)]="pliego.images[1]" (ngModelChange)="changeB64Img()">
-          <mat-option>Aucun</mat-option>
-          <mat-option *ngFor="let b64Img of b64Imgs" value="{{b64Img.key}}">
-            {{b64Img.label}}
-          </mat-option>
-        </mat-select>
-        <button *ngIf="pliego.images[1]" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.images[1]='';changeB64Img()">
-          <mat-icon>highlight_off</mat-icon>
-        </button>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Image 3</mat-label>
-        <mat-select [(ngModel)]="pliego.images[2]" (ngModelChange)="changeB64Img()">
-          <mat-option>Aucun</mat-option>
-          <mat-option *ngFor="let b64Img of b64Imgs" value="{{b64Img.key}}">
-            {{b64Img.label}}
-          </mat-option>
-        </mat-select>
-        <button *ngIf="pliego.images[2]" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.images[2]='';changeB64Img()">
-          <mat-icon>highlight_off</mat-icon>
-        </button>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Ligne 1</mat-label>
-        <input matInput [(ngModel)]="pliego.line1" name="line1">
-        <button *ngIf="pliego.line1" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line1=''">
-          <mat-icon>highlight_off</mat-icon>
-        </button>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Ligne 2</mat-label>
-        <input matInput [(ngModel)]="pliego.line2" name="line2">
-        <button *ngIf="pliego.line2" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line2=''">
-          <mat-icon>highlight_off</mat-icon>
-        </button>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Ligne 3</mat-label>
-        <input matInput [(ngModel)]="pliego.line3" name="line3">
-        <button *ngIf="pliego.line3" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line3=''">
-          <mat-icon>highlight_off</mat-icon>
-        </button>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Ligne 4</mat-label>
-        <input matInput [(ngModel)]="pliego.line4" name="line4">
-        <button *ngIf="pliego.line4" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line4=''">
-          <mat-icon>highlight_off</mat-icon>
-        </button>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Imprimeur</mat-label>
-        <input matInput [(ngModel)]="pliego.printer" name="printer">
-        <button *ngIf="pliego.printer" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.printer=''">
-          <mat-icon>highlight_off</mat-icon>
-        </button>
-      </mat-form-field>
-      <div class="submit">
-        <button mat-raised-button (click)="switchMode('edit')">Visualiser</button>
-      </div>
-    </div>
-  </mat-drawer>
-
-  <div class="sidenav-content">
-        
-    <div class="main">
-      <div class="loader" *ngIf="loaded.length<36">
-        <div class="sk-folding-cube">
-          <div class="sk-cube1 sk-cube"></div>
-          <div class="sk-cube2 sk-cube"></div>
-          <div class="sk-cube4 sk-cube"></div>
-          <div class="sk-cube3 sk-cube"></div>
-        </div>
-      </div>
-      <div class="button-row">
-        <button mat-button (click)="switchMode('edit')">Modifier</button>
-        <button mat-button (click)="savePNG()">Sauvegarder</button>
-      </div>
-      <div class="pliego-container">
-        <svg version="1.1" baseProfile="full" viewBox="0 0 740 1050" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" #pliegoSVG>
-
-          <defs>
-              <style>
-                {{b64Fonts}}
-              </style>
-          </defs>
-          
-          <g [ngClass]="mode">
-            
-          <image *ngIf="b64Bg" attr.xlink:href="data:image/jpg;base64,{{b64Bg}}" height="1050" width="740"/>
-          
-          <image *ngIf="b64Frise" attr.xlink:href="data:image/jpg;base64,{{b64Frise}}" height="1050" width="740"/>
-
-          <text class="number" x="91%" y="85px" text-anchor="end"
-            font-family="'Bodoni Moda', serif" font-size="1.2em" opacity="0.75" fill="#2e1900">N° 10.</text>
-
-          <text id="title-1" x="50%" y="570px" text-anchor="middle"
-            font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bolder" letter-spacing="0.67em"
-            opacity="0.75" fill="#2e1900">{{pliego.line1}}</text>
-
-          <text class="title-2" x="50%" y="614px" text-anchor="middle"
-            font-family="'Bodoni Moda', serif" font-weight="normal" font-size="1.5em"
-            opacity="0.75" fill="#2e1900">{{pliego.line2}}</text>
-
-          <text class="title-3" x="50%" y="675px" text-anchor="middle"
-            font-family="'Bodoni Moda', serif" font-size="3em" font-weight="bolder"
-            opacity="0.75" fill="#2e1900">{{pliego.line3}}</text>
-
-          <text class="title-4" x="50%" y="730px" text-anchor="middle"
-            font-family="'Bodoni Moda', serif" font-size="1.8em" font-weight="normal" font-style="italic"
-            opacity="0.75" fill="#2e1900">{{pliego.line4}}</text>
-
-          <text class="license" x="50%" y="870px" text-anchor="middle"
-            font-family="'Bodoni Moda', serif" font-size="1.5em" font-weight="lighter" opacity="0.75" fill="#2e1900">
-            <tspan x="50%" class="place" text-anchor="middle">Chez {{pliego.printer}}, impr. & libraire</tspan>
-            <tspan x="50%" class="address" text-anchor="middle" dy="1.5em"
-              font-size="0.9em">
-              À Genève, Boulevard Carl-Vogt Num. 66.
-            </tspan>
-          </text>
-          
-          <image *ngIf="displayImgs[0]" attr.xlink:href="data:image/png;base64,{{displayImgs[0].b64}}"
-            [attr.width]="displayImgs[0].width"
-            [attr.height]="displayImgs[0].height"
-            [attr.x]="displayImgs[0].x"
-            [attr.y]="displayImgs[0].y"/>
-          <image *ngIf="displayImgs[1]" attr.xlink:href="data:image/png;base64,{{displayImgs[1].b64}}"
-            [attr.width]="displayImgs[1].width"
-            [attr.height]="displayImgs[1].height"
-            [attr.x]="displayImgs[1].x"
-            [attr.y]="displayImgs[1].y"/>
-          <image *ngIf="displayImgs[2]" attr.xlink:href="data:image/png;base64,{{displayImgs[2].b64}}"
-            [attr.width]="displayImgs[2].width"
-            [attr.height]="displayImgs[2].height"
-            [attr.x]="displayImgs[2].x"
-            [attr.y]="displayImgs[2].y"/>
-          </g>
-          
-        </svg>
-      </div>
+<div class="main">
+  <div class="loader" *ngIf="loaded.length<36">
+    <div class="sk-folding-cube">
+      <div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div>
     </div>
   </div>
-</mat-drawer-container>
+  <div class="button-row">
+    <button mat-button (click)="switchMode('edit')">Modifier</button>
+    <button mat-button (click)="savePNG()">Sauvegarder</button>
+  </div>
+  <div class="pliego-container">
+    <svg version="1.1" baseProfile="full" viewBox="0 0 740 1050" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" #pliegoSVG>
+
+      <defs>
+          <style>
+            {{b64Fonts}}
+          </style>
+      </defs>
+      
+      <g [ngClass]="mode">
+        
+      <image *ngIf="b64Bg" attr.xlink:href="data:image/jpg;base64,{{b64Bg}}" height="1050" width="740"/>
+      
+      <image *ngIf="b64Frise" attr.xlink:href="data:image/jpg;base64,{{b64Frise}}" height="1050" width="740"/>
+
+      <text class="number" x="91%" y="85px" text-anchor="end"
+        font-family="'Bodoni Moda', serif" font-size="1.2em" opacity="0.75" fill="#2e1900">N° 10.</text>
+
+      <text id="title-1" x="50%" y="570px" text-anchor="middle"
+        font-family="'Bodoni Moda', serif" font-size="2.5em" font-weight="bolder" letter-spacing="0.2em"
+        opacity="0.75" fill="#2e1900">{{pliego.line1}}</text>
+
+      <text class="title-2" x="50%" y="609px" text-anchor="middle"
+        font-family="'Bodoni Moda', serif" font-weight="normal" font-size="1.8em"
+        opacity="0.75" fill="#2e1900">{{pliego.line2}}</text>
+
+      <text class="title-3" x="50%" y="675px" text-anchor="middle"
+        font-family="'Bodoni Moda', serif" font-size="3em" font-weight="bolder"
+        opacity="0.75" fill="#2e1900">{{pliego.line3}}</text>
+
+      <text class="title-4" x="50%" y="720px" text-anchor="middle"
+        font-family="'Bodoni Moda', serif" font-size="1.8em" font-weight="normal" font-style="italic"
+        opacity="0.75" fill="#2e1900">{{pliego.line4}}</text>
+
+      <text class="license" x="50%" y="870px" text-anchor="middle"
+        font-family="'Bodoni Moda', serif" font-size="1.5em" font-weight="lighter" opacity="0.75" fill="#2e1900">
+        <tspan x="50%" class="place" text-anchor="middle">Chez {{pliego.printer}}, impr. & libraire</tspan>
+        <tspan x="50%" class="address" text-anchor="middle" dy="1.5em"
+          font-size="0.9em">
+          À Genève, Boulevard Carl-Vogt Num. 66.
+        </tspan>
+      </text>
+      
+      <image *ngIf="displayImgs[0]" attr.xlink:href="data:image/png;base64,{{displayImgs[0].b64}}"
+        [attr.width]="displayImgs[0].width"
+        [attr.height]="displayImgs[0].height"
+        [attr.x]="displayImgs[0].x"
+        [attr.y]="displayImgs[0].y"/>
+      <image *ngIf="displayImgs[1]" attr.xlink:href="data:image/png;base64,{{displayImgs[1].b64}}"
+        [attr.width]="displayImgs[1].width"
+        [attr.height]="displayImgs[1].height"
+        [attr.x]="displayImgs[1].x"
+        [attr.y]="displayImgs[1].y"/>
+      <image *ngIf="displayImgs[2]" attr.xlink:href="data:image/png;base64,{{displayImgs[2].b64}}"
+        [attr.width]="displayImgs[2].width"
+        [attr.height]="displayImgs[2].height"
+        [attr.x]="displayImgs[2].x"
+        [attr.y]="displayImgs[2].y"/>
+      </g>
+      
+    </svg>
+  </div>
+</div>
