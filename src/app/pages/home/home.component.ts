@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   pliego = new Pliego();
   displayImgs: any[] = [];
   loaded: string[] = [];
+  editmode: string = "none";
   @ViewChild('pliegoSVG', { static: false }) svg: any;
   @ViewChild('canvas', { static: false }) canvas: any;
 
@@ -58,7 +59,14 @@ export class HomeComponent implements OnInit {
 
   switchMode(mode: string): void {
     this.mode = mode;
-    console.log(this.mode);
+    switch (this.mode) {
+      case 'edit':
+        this.editmode = "block";
+        break;
+      default:
+        this.editmode = "none";
+        break;
+    }
   }
 
   async savePNG() {
@@ -103,7 +111,7 @@ export class HomeComponent implements OnInit {
   getFiguresData(img: HTMLImageElement, n: number) {
     let maxWidth = 220;
     let maxHeight = 300;
-    let yBottom = 440;
+    let yBottom = 450;
     let xRef = 0;
     let scale = maxWidth / img.width;
     if (scale * img.height > maxHeight) {

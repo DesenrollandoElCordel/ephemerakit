@@ -8,8 +8,12 @@
     </div>
   </div>
   <div class="button-row">
-    <button mat-button (click)="switchMode('edit')">Modifier</button>
-    <button mat-button (click)="savePNG()">Sauvegarder</button>
+    <button *ngIf="mode=='edit'" mat-button (click)="switchMode('visualize')">
+      <mat-icon>visibility</mat-icon> Visualiser</button>
+    <button *ngIf="mode=='visualize'" mat-button (click)="switchMode('edit')">
+      <mat-icon>edit</mat-icon> Modifier</button>
+    <button *ngIf="mode=='visualize'" mat-button (click)="savePNG()">
+      <mat-icon>save</mat-icon> Sauvegarder</button>
   </div>
   <div class="pliego-container">
     <svg version="1.1" baseProfile="full" viewBox="0 0 740 1050" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" #pliegoSVG>
@@ -69,6 +73,57 @@
         [attr.height]="displayImgs[2].height"
         [attr.x]="displayImgs[2].x"
         [attr.y]="displayImgs[2].y"/>
+      </g>
+      
+      <g [ngStyle]="{'display': editmode}">
+        <g style="cursor: pointer;">
+            <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
+                <circle cx="254.79" cy="154.74" r="39.131" style="fill:rgb(162,42,44);"/>
+            </g>
+            <g transform="matrix(3.67397e-17,-0.600006,0.870139,5.32807e-17,27.9094,206.914)">
+                <path d="M147,166.038L147,153.66L169.049,153.66L169.049,147.471L187,159.849L169.049,172.227L169.049,166.038L147,166.038Z" style="fill:white;"/>
+            </g>
+        </g>
+        <g transform="matrix(1,0,0,1,203,0)" style="cursor: pointer;">
+            <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
+                <circle cx="254.79" cy="154.74" r="39.131" style="fill:rgb(162,42,44);"/>
+            </g>
+            <g transform="matrix(3.67397e-17,-0.600006,0.870139,5.32807e-17,27.9094,206.914)">
+                <path d="M147,166.038L147,153.66L169.049,153.66L169.049,147.471L187,159.849L169.049,172.227L169.049,166.038L147,166.038Z" style="fill:white;"/>
+            </g>
+        </g>
+        <g transform="matrix(1,0,0,1,410,0)" style="cursor: pointer;">
+            <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
+                <circle cx="254.79" cy="154.74" r="39.131" style="fill:rgb(162,42,44);"/>
+            </g>
+            <g transform="matrix(3.67397e-17,-0.600006,0.870139,5.32807e-17,27.9094,206.914)">
+                <path d="M147,166.038L147,153.66L169.049,153.66L169.049,147.471L187,159.849L169.049,172.227L169.049,166.038L147,166.038Z" style="fill:white;"/>
+            </g>
+        </g>
+        <g transform="matrix(1,0,0,-1,0,588.426)" style="cursor: pointer;">
+            <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
+                <circle cx="254.79" cy="154.74" r="39.131" style="fill:rgb(162,42,44);"/>
+            </g>
+            <g transform="matrix(3.67397e-17,-0.600006,0.870139,5.32807e-17,27.9094,206.914)">
+                <path d="M147,166.038L147,153.66L169.049,153.66L169.049,147.471L187,159.849L169.049,172.227L169.049,166.038L147,166.038Z" style="fill:white;"/>
+            </g>
+        </g>
+        <g transform="matrix(1,0,0,-1,203,588.426)" style="cursor: pointer;">
+            <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
+                <circle cx="254.79" cy="154.74" r="39.131" style="fill:rgb(162,42,44);"/>
+            </g>
+            <g transform="matrix(3.67397e-17,-0.600006,0.870139,5.32807e-17,27.9094,206.914)">
+                <path d="M147,166.038L147,153.66L169.049,153.66L169.049,147.471L187,159.849L169.049,172.227L169.049,166.038L147,166.038Z" style="fill:white;"/>
+            </g>
+        </g>
+        <g transform="matrix(1,0,0,-1,410,588.426)" style="cursor: pointer;">
+            <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
+                <circle cx="254.79" cy="154.74" r="39.131" style="fill:rgb(162,42,44);"/>
+            </g>
+            <g transform="matrix(3.67397e-17,-0.600006,0.870139,5.32807e-17,27.9094,206.914)">
+                <path d="M147,166.038L147,153.66L169.049,153.66L169.049,147.471L187,159.849L169.049,172.227L169.049,166.038L147,166.038Z" style="fill:white;"/>
+            </g>
+        </g>
       </g>
       
     </svg>
