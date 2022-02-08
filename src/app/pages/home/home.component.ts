@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   pliego = new Pliego();
   displayImgs: any[] = [];
   drawerWidth: string = '33%';
+  loaded: string[] = [];
   @ViewChild('drawer', { static: false }) drawer!: MatDrawer;
   @ViewChild('pliegoSVG', { static: false }) svg: any;
   @ViewChild('canvas', { static: false }) canvas: any;
@@ -38,19 +39,23 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.b64.getFontsBase64().subscribe(
-      fonts => this.b64Fonts = fonts
-    );
-    this.b64.getBgBase64().subscribe(
-      b64Bg => this.b64Bg = b64Bg
-    );
-    this.b64.getFriseBase64().subscribe(
-      b64Frise => this.b64Frise = b64Frise
-    );
+    this.b64.getFontsBase64().subscribe((fonts) => {
+      this.b64Fonts = fonts;
+      this.loaded.push('fonts');
+    });
+    this.b64.getBgBase64().subscribe((b64Bg) => {
+      this.b64Bg = b64Bg;
+      this.loaded.push('bg');
+    });
+    this.b64.getFriseBase64().subscribe((b64Frise) => {
+      this.b64Frise = b64Frise;
+      this.loaded.push('frise');
+    });
     this.b64.getImgsBase64().subscribe(b64Imgs => {
       this.b64.imgs.forEach((img, index) => {
         img.b64 = b64Imgs[index];
         this.b64Imgs.push(img);
+        this.loaded.push('img');
       });
       this.changeB64Img();
     });
