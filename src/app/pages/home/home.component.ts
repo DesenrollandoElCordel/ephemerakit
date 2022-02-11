@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   b64Frise: string = "";
   b64Imgs: any[] = [];
   pliego = new Pliego();
-  displayImgs: any[] = [];
+  pngImages: any[] = [];
   loaded: string[] = [];
   editmode: string = "none";
   @ViewChild('pliegoSVG', { static: false }) svg: any;
@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
         this.b64Imgs.push(img);
         this.loaded.push('img');
       });
-      this.changeB64Img();
+      this.updateFigures();
     });
   }
 
@@ -92,19 +92,16 @@ export class HomeComponent implements OnInit {
     img.src = url;
   }
 
-  changeB64Img() {
+  updateFigures() {
     this.pliego.images.forEach((key, index) => {
       let tmp = this.b64Imgs.find(obj => obj.key === key);
-      if (tmp !== undefined) {
-        let i = new Image();
-        i.onload = () => {
-          tmp = Object.assign(tmp, this.getFiguresData(i, index))
-          this.displayImgs[index] = tmp;
-        };
-        i.src = 'data:image/png;base64,' + tmp.b64;
-      } else {
-        this.displayImgs[index] = '';
-      }
+      tmp = JSON.parse(JSON.stringify(tmp));
+      let i = new Image();
+      i.onload = () => {
+        tmp = Object.assign(tmp, this.getFiguresData(i, index))
+        this.pngImages[index] = tmp;
+      };
+      i.src = 'data:image/png;base64,' + tmp.b64;
     });
   }
 
@@ -136,6 +133,23 @@ export class HomeComponent implements OnInit {
       width: Math.round(img.width * scale),
       height: Math.round(img.height * scale)
     };
+  }
+
+  changeImage(n: number, dir: string) {
+    let index = this.b64Imgs.findIndex(o => o.key === this.pliego.images[n]);
+    if (dir == 'up') {
+      index++;
+      if (index == this.b64Imgs.length) {
+        index = 0;
+      }
+    } else {
+      index--;
+      if (index == -1) {
+        index = this.b64Imgs.length - 1;
+      }
+    }
+    this.pliego.images[n] = this.b64Imgs[index].key;
+    this.updateFigures();
   }
 
 }

@@ -1,5 +1,5 @@
 <div class="main">
-  <div class="loader" *ngIf="loaded.length<36">
+  <div class="loader" *ngIf="loaded.length<37">
     <div class="sk-folding-cube">
       <div class="sk-cube1 sk-cube"></div>
       <div class="sk-cube2 sk-cube"></div>
@@ -58,25 +58,25 @@
         </tspan>
       </text>
       
-      <image *ngIf="displayImgs[0]" attr.xlink:href="data:image/png;base64,{{displayImgs[0].b64}}"
-        [attr.width]="displayImgs[0].width"
-        [attr.height]="displayImgs[0].height"
-        [attr.x]="displayImgs[0].x"
-        [attr.y]="displayImgs[0].y"/>
-      <image *ngIf="displayImgs[1]" attr.xlink:href="data:image/png;base64,{{displayImgs[1].b64}}"
-        [attr.width]="displayImgs[1].width"
-        [attr.height]="displayImgs[1].height"
-        [attr.x]="displayImgs[1].x"
-        [attr.y]="displayImgs[1].y"/>
-      <image *ngIf="displayImgs[2]" attr.xlink:href="data:image/png;base64,{{displayImgs[2].b64}}"
-        [attr.width]="displayImgs[2].width"
-        [attr.height]="displayImgs[2].height"
-        [attr.x]="displayImgs[2].x"
-        [attr.y]="displayImgs[2].y"/>
+      <image *ngIf="pngImages[0]" attr.xlink:href="data:image/png;base64,{{pngImages[0].b64}}"
+        [attr.width]="pngImages[0].width"
+        [attr.height]="pngImages[0].height"
+        [attr.x]="pngImages[0].x"
+        [attr.y]="pngImages[0].y"/>
+      <image *ngIf="pngImages[1]" attr.xlink:href="data:image/png;base64,{{pngImages[1].b64}}"
+        [attr.width]="pngImages[1].width"
+        [attr.height]="pngImages[1].height"
+        [attr.x]="pngImages[1].x"
+        [attr.y]="pngImages[1].y"/>
+      <image *ngIf="pngImages[2]" attr.xlink:href="data:image/png;base64,{{pngImages[2].b64}}"
+        [attr.width]="pngImages[2].width"
+        [attr.height]="pngImages[2].height"
+        [attr.x]="pngImages[2].x"
+        [attr.y]="pngImages[2].y"/>
       </g>
       
       <g [ngStyle]="{'display': editmode}">
-        <g style="cursor: pointer;">
+        <g style="cursor: pointer;" (click)="changeImage(0,'up')">
             <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
                 <circle cx="254.79" cy="154.74" r="39.131" style="fill:rgb(162,42,44);"/>
             </g>
@@ -84,7 +84,7 @@
                 <path d="M147,166.038L147,153.66L169.049,153.66L169.049,147.471L187,159.849L169.049,172.227L169.049,166.038L147,166.038Z" style="fill:white;"/>
             </g>
         </g>
-        <g transform="matrix(1,0,0,1,203,0)" style="cursor: pointer;">
+        <g transform="matrix(1,0,0,1,203,0)" style="cursor: pointer;" (click)="changeImage(1,'up')">
             <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
                 <circle cx="254.79" cy="154.74" r="39.131" style="fill:rgb(162,42,44);"/>
             </g>
@@ -92,7 +92,7 @@
                 <path d="M147,166.038L147,153.66L169.049,153.66L169.049,147.471L187,159.849L169.049,172.227L169.049,166.038L147,166.038Z" style="fill:white;"/>
             </g>
         </g>
-        <g transform="matrix(1,0,0,1,410,0)" style="cursor: pointer;">
+        <g transform="matrix(1,0,0,1,410,0)" style="cursor: pointer;" (click)="changeImage(2,'up')">
             <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
                 <circle cx="254.79" cy="154.74" r="39.131" style="fill:rgb(162,42,44);"/>
             </g>
@@ -100,7 +100,7 @@
                 <path d="M147,166.038L147,153.66L169.049,153.66L169.049,147.471L187,159.849L169.049,172.227L169.049,166.038L147,166.038Z" style="fill:white;"/>
             </g>
         </g>
-        <g transform="matrix(1,0,0,-1,0,588.426)" style="cursor: pointer;">
+        <g transform="matrix(1,0,0,-1,0,588.426)" style="cursor: pointer;" (click)="changeImage(0,'down')">
             <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
                 <circle cx="254.79" cy="154.74" r="39.131" style="fill:rgb(162,42,44);"/>
             </g>
@@ -108,7 +108,7 @@
                 <path d="M147,166.038L147,153.66L169.049,153.66L169.049,147.471L187,159.849L169.049,172.227L169.049,166.038L147,166.038Z" style="fill:white;"/>
             </g>
         </g>
-        <g transform="matrix(1,0,0,-1,203,588.426)" style="cursor: pointer;">
+        <g transform="matrix(1,0,0,-1,203,588.426)" style="cursor: pointer;" (click)="changeImage(1,'down')">
             <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
                 <circle cx="254.79" cy="154.74" r="39.131" style="fill:rgb(162,42,44);"/>
             </g>
@@ -116,7 +116,7 @@
                 <path d="M147,166.038L147,153.66L169.049,153.66L169.049,147.471L187,159.849L169.049,172.227L169.049,166.038L147,166.038Z" style="fill:white;"/>
             </g>
         </g>
-        <g transform="matrix(1,0,0,-1,410,588.426)" style="cursor: pointer;">
+        <g transform="matrix(1,0,0,-1,410,588.426)" style="cursor: pointer;" (click)="changeImage(2,'down')">
             <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
                 <circle cx="254.79" cy="154.74" r="39.131" style="fill:rgb(162,42,44);"/>
             </g>

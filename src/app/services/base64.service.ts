@@ -14,6 +14,7 @@ export class Base64Service {
   private friseBase64Url = 'assets/frise.txt';
   private imgBase64Url = 'assets/img/';
   public imgs: Array<any> = [
+    { key: 'blank', label: '' },
     { key: 'ane', label: 'Âne' },
     { key: 'bateau', label: 'Bateau' },
     { key: 'croix', label: 'Croix' },
