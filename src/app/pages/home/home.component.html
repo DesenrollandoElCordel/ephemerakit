@@ -10,6 +10,8 @@
   <div class="button-row">
     <button *ngIf="mode=='edit'" mat-button (click)="switchMode('visualize')">
       <mat-icon>visibility</mat-icon> Visualiser</button>
+    <button *ngIf="mode=='edit'" mat-button (click)="randomFigures()">
+        <mat-icon>shuffle</mat-icon> Fig. au hasard</button>
     <button *ngIf="mode=='visualize'" mat-button (click)="switchMode('edit')">
       <mat-icon>edit</mat-icon> Modifier</button>
     <button *ngIf="mode=='visualize'" mat-button (click)="savePNG()">

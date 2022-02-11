@@ -152,4 +152,16 @@ export class HomeComponent implements OnInit {
     this.updateFigures();
   }
 
+  randomFigures() {
+    let keys: string[] = [];
+    this.b64Imgs.forEach((img) => {
+      keys.push(img.key);
+    });
+    keys = keys.sort(() => Math.random() - 0.5);
+    this.pliego.images[0] = keys[0];
+    this.pliego.images[1] = keys[1];
+    this.pliego.images[2] = keys[2];
+    this.updateFigures();
+  }
+
 }
