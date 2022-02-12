@@ -11,7 +11,7 @@
     <button *ngIf="mode=='edit'" mat-button (click)="switchMode('visualize')">
       <mat-icon>visibility</mat-icon> Visualiser</button>
     <button *ngIf="mode=='edit'" mat-button (click)="randomFigures()">
-        <mat-icon>shuffle</mat-icon> Fig. au hasard</button>
+        <mat-icon>shuffle</mat-icon> Figures au hasard</button>
     <button *ngIf="mode=='visualize'" mat-button (click)="switchMode('edit')">
       <mat-icon>edit</mat-icon> Modifier</button>
     <button *ngIf="mode=='visualize'" mat-button (click)="savePNG()">
@@ -126,10 +126,31 @@
                 <path d="M147,166.038L147,153.66L169.049,153.66L169.049,147.471L187,159.849L169.049,172.227L169.049,166.038L147,166.038Z" style="fill:white;"/>
             </g>
         </g>
-        <circle cx="30" cy="560" r="20" style="fill:rgb(162,42,44);cursor: pointer;" (click)="openBottomSheet('line1')"/>
-        <circle cx="30" cy="610" r="20" style="fill:rgb(162,42,44);cursor: pointer;" (click)="openBottomSheet('line2')"/>
-        <circle cx="30" cy="660" r="20" style="fill:rgb(162,42,44);cursor: pointer;" (click)="openBottomSheet('line3')"/>
-        <circle cx="30" cy="710" r="20" style="fill:rgb(162,42,44);cursor: pointer;" (click)="openBottomSheet('line4')"/>
+        <g style="cursor: pointer;" (click)="openBottomSheet('line1')">
+          <circle cx="700" cy="555" r="20" style="fill:rgb(162,42,44)"/>
+          <text class="number" x="700" y="565" text-anchor="middle"
+            font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bold" fill="#FFFFFF">1</text>
+        </g>
+        <g style="cursor: pointer;" (click)="openBottomSheet('line2')">
+          <circle cx="700" cy="602" r="20" style="fill:rgb(162,42,44)"/>
+          <text class="number" x="700" y="612" text-anchor="middle"
+            font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bold" fill="#FFFFFF">2</text>
+        </g>
+        <g style="cursor: pointer;" (click)="openBottomSheet('line3')">
+          <circle cx="700" cy="660" r="20" style="fill:rgb(162,42,44)"/>
+          <text class="number" x="700" y="670" text-anchor="middle"
+            font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bold" fill="#FFFFFF">3</text>
+        </g>
+        <g style="cursor: pointer;" (click)="openBottomSheet('line4')">
+          <circle cx="700" cy="710" r="20" style="fill:rgb(162,42,44)"/>
+          <text class="number" x="698" y="720" text-anchor="middle"
+            font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bold" fill="#FFFFFF">4</text>
+        </g>
+        <g style="cursor: pointer;" (click)="openBottomSheet('printer')">
+          <circle cx="310" cy="822" r="20" style="fill:rgb(162,42,44)"/>
+          <text class="number" x="310" y="832" text-anchor="middle"
+            font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bold" fill="#FFFFFF">5</text>
+        </g>
       </g>
       
     </svg>

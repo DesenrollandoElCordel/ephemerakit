@@ -1,5 +1,5 @@
 <div *ngIf="key=='line1'">
-<mat-form-field >
+<mat-form-field appearance="outline">
   <mat-label>Ligne 1</mat-label>
   <input matInput type="text" [(ngModel)]="pliego.line1">
   <button *ngIf="pliego.line1" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line1=''">
@@ -9,7 +9,7 @@
 </div>
 
 <div *ngIf="key=='line2'">
-<mat-form-field >
+<mat-form-field appearance="outline">
   <mat-label>Ligne 2</mat-label>
   <input matInput type="text" [(ngModel)]="pliego.line2">
   <button *ngIf="pliego.line2" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line2=''">
@@ -19,7 +19,7 @@
 </div>
 
 <div *ngIf="key=='line3'">
-<mat-form-field >
+<mat-form-field appearance="outline">
   <mat-label>Ligne 3</mat-label>
   <input matInput type="text" [(ngModel)]="pliego.line3">
   <button *ngIf="pliego.line3" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line3=''">
@@ -29,7 +29,7 @@
 </div>
 
 <div *ngIf="key=='line4'">
-<mat-form-field >
+<mat-form-field appearance="outline">
   <mat-label>Ligne 4</mat-label>
   <input matInput type="text" [(ngModel)]="pliego.line4">
   <button *ngIf="pliego.line4" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line4=''">
@@ -39,7 +39,7 @@
 </div>
 
 <div *ngIf="key=='printer'">
-<mat-form-field >
+<mat-form-field appearance="outline">
   <mat-label>Imprimeur</mat-label>
   <input matInput type="text" [(ngModel)]="pliego.printer">
   <button *ngIf="pliego.printer" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.printer=''">
