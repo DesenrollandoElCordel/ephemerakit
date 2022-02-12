@@ -16,6 +16,8 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 import { HomeComponent } from './pages/home/home.component';
 import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   imports: [
@@ -30,7 +32,13 @@ import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   declarations: [
     AppComponent,
