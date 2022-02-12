@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   );
   pngImages: any[] = [];
   loaded: string[] = [];
+  displayLoader: boolean;
   editmode: string = "none";
   @ViewChild('pliegoSVG', { static: false }) svg: any;
   @ViewChild('canvas', { static: false }) canvas: any;
@@ -35,7 +36,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private b64: Base64Service,
     private bottomSheet: MatBottomSheet
-  ) { }
+  ) {
+    this.displayLoader = false;
+  }
 
   ngOnInit(): void {
     this.b64.getFontsBase64().subscribe((fonts) => {
@@ -73,6 +76,7 @@ export class HomeComponent implements OnInit {
   }
 
   async savePNG() {
+    this.displayLoader = true;
     let svgElement = this.svg.nativeElement;
     let { width, height } = svgElement.getBBox();
     let clonedSvgElement = svgElement.cloneNode(true);
@@ -85,12 +89,14 @@ export class HomeComponent implements OnInit {
     let img = new Image();
     let svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
     let url = DOMURL.createObjectURL(svg);
+    let that = this;
     img.onload = function() {
       ctx!.drawImage(img, 0, 0);
       let png = document.createElement('a');
       png.href = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
       png.download = 'MyPliego.png';
       png.click();
+      that.displayLoader = false;
     };
     img.src = url;
   }
