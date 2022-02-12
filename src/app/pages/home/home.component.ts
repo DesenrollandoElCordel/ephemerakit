@@ -1,15 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { BottomSheetComponent } from '../../bottom-sheet/bottom-sheet.component';
 
 import { Base64Service } from '../../services/base64.service';
 
-export class Pliego {
-  line1: string = "VRAY DISCOURS";
-  line2: string = "de la miraculeuse délivrance envoyée de Dieu";
-  line3: string = "À LA VILLE DE GENÈVE";
-  line4: string = "le 12, jour de décembre, 1602";
-  printer: string = "Georges";
-  images: Array<string> = ['tour', 'homme_epee_chapeau', 'femmes_groupe'];
-}
+import { Pliego } from '../../models/pliego';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +18,14 @@ export class HomeComponent implements OnInit {
   b64Bg: string = "";
   b64Frise: string = "";
   b64Imgs: any[] = [];
-  pliego = new Pliego();
+  pliego = new Pliego(
+    "VRAY DISCOURS",
+    "de la miraculeuse délivrance envoyée de Dieu",
+    "À LA VILLE DE GENÈVE",
+    "le 12, jour de décembre, 1602",
+    "Georges",
+    ['tour', 'homme_epee_chapeau', 'femmes_groupe']
+  );
   pngImages: any[] = [];
   loaded: string[] = [];
   editmode: string = "none";
@@ -31,7 +33,8 @@ export class HomeComponent implements OnInit {
   @ViewChild('canvas', { static: false }) canvas: any;
 
   constructor(
-    private b64: Base64Service
+    private b64: Base64Service,
+    private bottomSheet: MatBottomSheet
   ) { }
 
   ngOnInit(): void {
@@ -162,6 +165,15 @@ export class HomeComponent implements OnInit {
     this.pliego.images[1] = keys[1];
     this.pliego.images[2] = keys[2];
     this.updateFigures();
+  }
+
+  openBottomSheet(key: string): void {
+    this.bottomSheet.open(BottomSheetComponent, {
+      data: {
+        key: key,
+        pliego: this.pliego
+      }
+    });
   }
 
 }

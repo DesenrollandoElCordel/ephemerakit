@@ -1,0 +1,51 @@
+<div *ngIf="key=='line1'">
+<mat-form-field >
+  <mat-label>Ligne 1</mat-label>
+  <input matInput type="text" [(ngModel)]="pliego.line1">
+  <button *ngIf="pliego.line1" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line1=''">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+</div>
+
+<div *ngIf="key=='line2'">
+<mat-form-field >
+  <mat-label>Ligne 2</mat-label>
+  <input matInput type="text" [(ngModel)]="pliego.line2">
+  <button *ngIf="pliego.line2" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line2=''">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+</div>
+
+<div *ngIf="key=='line3'">
+<mat-form-field >
+  <mat-label>Ligne 3</mat-label>
+  <input matInput type="text" [(ngModel)]="pliego.line3">
+  <button *ngIf="pliego.line3" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line3=''">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+</div>
+
+<div *ngIf="key=='line4'">
+<mat-form-field >
+  <mat-label>Ligne 4</mat-label>
+  <input matInput type="text" [(ngModel)]="pliego.line4">
+  <button *ngIf="pliego.line4" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.line4=''">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+</div>
+
+<div *ngIf="key=='printer'">
+<mat-form-field >
+  <mat-label>Imprimeur</mat-label>
+  <input matInput type="text" [(ngModel)]="pliego.printer">
+  <button *ngIf="pliego.printer" matSuffix mat-icon-button aria-label="Clear" (click)="pliego.printer=''">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+</div>
+
+<button (click)="closeBottomSheet()" mat-raised-button>Fermer</button>
