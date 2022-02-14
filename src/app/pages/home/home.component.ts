@@ -82,12 +82,12 @@ export class HomeComponent implements OnInit {
     let clonedSvgElement = svgElement.cloneNode(true);
     let svgString = new XMLSerializer().serializeToString(clonedSvgElement);
     let svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+    let DOMURL = self.URL || self.webkitURL || self;
+    let url = DOMURL.createObjectURL(svg);
     let canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
     let ctx = canvas.getContext("2d");
-    let DOMURL = self.URL || self.webkitURL || self;
-    let url = DOMURL.createObjectURL(svg);
     let img = new Image();
     let that = this;
     img.onload = function() {
