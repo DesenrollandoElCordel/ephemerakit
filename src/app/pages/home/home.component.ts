@@ -3,6 +3,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BottomSheetComponent } from '../../bottom-sheet/bottom-sheet.component';
 
 import { Base64Service } from '../../services/base64.service';
+import { ExportService } from '../../services/export.service';
 
 import { Pliego } from '../../models/pliego';
 
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private b64: Base64Service,
+    private exportService: ExportService,
     private bottomSheet: MatBottomSheet
   ) {
     this.displayLoader = false;
@@ -76,29 +78,7 @@ export class HomeComponent implements OnInit {
   }
 
   async savePNG() {
-    this.displayLoader = true;
-    let svgElement = this.svg.nativeElement;
-    let { width, height } = svgElement.getBBox();
-    let clonedSvgElement = svgElement.cloneNode(true);
-    let svgString = new XMLSerializer().serializeToString(clonedSvgElement);
-    let svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-    let DOMURL = self.URL || self.webkitURL || self;
-    let url = DOMURL.createObjectURL(svg);
-    let canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-    let ctx = canvas.getContext("2d");
-    let img = new Image();
-    let that = this;
-    img.onload = function() {
-      ctx!.drawImage(img, 0, 0);
-      let png = document.createElement('a');
-      png.href = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
-      png.download = 'MyPliego.png';
-      png.click();
-      that.displayLoader = false;
-    };
-    img.src = url;
+    this.exportService.saveAsPng(this.svg.nativeElement);
   }
 
   updateFigures() {
