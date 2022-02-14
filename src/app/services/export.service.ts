@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class ExportService {
 
-  private counter: number = 0;
   private width: number = 0;
   private height: number = 0;
   private svgElement: any = null;
