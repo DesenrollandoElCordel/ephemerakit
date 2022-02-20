@@ -15,10 +15,6 @@ import { Pliego } from '../../models/pliego';
 export class HomeComponent implements OnInit {
 
   mode: string = "visualize";
-  b64Fonts: string = "";
-  b64Bg: string = "";
-  b64Frise: string = "";
-  b64Imgs: any[] = [];
   pliego = new Pliego(
     "VRAY DISCOURS",
     "de la miraculeuse délivrance envoyée de Dieu",
@@ -35,7 +31,7 @@ export class HomeComponent implements OnInit {
   @ViewChild('canvas', { static: false }) canvas: any;
 
   constructor(
-    private b64: Base64Service,
+    public b64: Base64Service,
     private exportService: ExportService,
     private bottomSheet: MatBottomSheet
   ) {
@@ -43,25 +39,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.b64.getFontsBase64().subscribe((fonts) => {
-      this.b64Fonts = fonts;
-      this.loaded.push('fonts');
-    });
-    this.b64.getBgBase64().subscribe((b64Bg) => {
-      this.b64Bg = b64Bg;
-      this.loaded.push('bg');
-    });
-    this.b64.getFriseBase64().subscribe((b64Frise) => {
-      this.b64Frise = b64Frise;
-      this.loaded.push('frise');
-    });
-    this.b64.getImgsBase64().subscribe(b64Imgs => {
-      this.b64.imgs.forEach((img, index) => {
-        img.b64 = b64Imgs[index];
-        this.b64Imgs.push(img);
-        this.loaded.push('img');
-      });
+    this.displayLoader = true;
+    this.b64.loadData().then(() => {
       this.updateFigures();
+      this.displayLoader = false;
     });
   }
 
@@ -83,8 +64,9 @@ export class HomeComponent implements OnInit {
 
   updateFigures() {
     this.pliego.images.forEach((key, index) => {
-      let tmp = this.b64Imgs.find(obj => obj.key === key);
+      let tmp = this.b64.imgs.find(obj => obj.key === key);
       tmp = JSON.parse(JSON.stringify(tmp));
+      // We preload image to be sure it will appear in svg, canvas and png
       let i = new Image();
       i.onload = () => {
         tmp = Object.assign(tmp, this.getFiguresData(i, index))
@@ -125,25 +107,25 @@ export class HomeComponent implements OnInit {
   }
 
   changeImage(n: number, dir: string) {
-    let index = this.b64Imgs.findIndex(o => o.key === this.pliego.images[n]);
+    let index = this.b64.imgs.findIndex(o => o.key === this.pliego.images[n]);
     if (dir == 'up') {
       index++;
-      if (index == this.b64Imgs.length) {
+      if (index == this.b64.imgs.length) {
         index = 0;
       }
     } else {
       index--;
       if (index == -1) {
-        index = this.b64Imgs.length - 1;
+        index = this.b64.imgs.length - 1;
       }
     }
-    this.pliego.images[n] = this.b64Imgs[index].key;
+    this.pliego.images[n] = this.b64.imgs[index].key;
     this.updateFigures();
   }
 
   randomFigures() {
     let keys: string[] = [];
-    this.b64Imgs.forEach((img) => {
+    this.b64.imgs.forEach((img) => {
       keys.push(img.key);
     });
     keys = keys.sort(() => Math.random() - 0.5);

@@ -49,10 +49,44 @@ export class Base64Service {
     { key: 'tour', label: 'Tour' },
     { key: 'vache', label: 'Vache' }
   ];
+  fonts: string = "";
+  bg: string = "";
+  frise: string = "";
+  loaded: string[] = [];
+  toLoad: number = 0;
 
   constructor(private http: HttpClient) { }
 
+  loadData() {
+    return new Promise((resolve, reject) => {
+      this.getFontsBase64().subscribe((fonts) => {
+        this.fonts = fonts;
+        this.loaded.push('fonts');
+      });
+      this.getBgBase64().subscribe((b64Bg) => {
+        this.bg = b64Bg;
+        this.loaded.push('bg');
+      });
+      this.getFriseBase64().subscribe((b64Frise) => {
+        this.frise = b64Frise;
+        this.loaded.push('frise');
+      });
+      this.getImgsBase64().subscribe(b64Imgs => {
+        this.imgs.forEach((img, index) => {
+          img.b64 = b64Imgs[index];
+          this.loaded.push('img' + index);
+        });
+        resolve(true);
+      });
+    });
+  }
+
+  getPercents() {
+    return Math.round(this.loaded.length / this.toLoad * 100);
+  }
+
   getFontsBase64(): Observable<string> {
+    this.toLoad++;
     const options: Object = {
       responseType: 'text',
     };
@@ -63,6 +97,7 @@ export class Base64Service {
   }
 
   getBgBase64(): Observable<string> {
+    this.toLoad++;
     const options: Object = {
       responseType: 'text',
     };
@@ -73,6 +108,7 @@ export class Base64Service {
   }
 
   getFriseBase64(): Observable<string> {
+    this.toLoad++;
     const options: Object = {
       responseType: 'text',
     };
@@ -88,6 +124,7 @@ export class Base64Service {
     };
     let calls: Array<any> = [];
     this.imgs.forEach(data => {
+      this.toLoad++;
       calls.push(this.http.get<string>(this.imgBase64Url + data.key + ".txt", options));
     });
     return forkJoin(calls);

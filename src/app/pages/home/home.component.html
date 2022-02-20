@@ -1,11 +1,12 @@
 <div class="main">
-  <div class="loader" *ngIf="loaded.length < 37 || displayLoader">
+  <div class="loader" *ngIf="displayLoader">
     <div class="sk-folding-cube">
       <div class="sk-cube1 sk-cube"></div>
       <div class="sk-cube2 sk-cube"></div>
       <div class="sk-cube4 sk-cube"></div>
       <div class="sk-cube3 sk-cube"></div>
     </div>
+    <div class="percent">Préchargement<br />{{b64.getPercents()}}%</div>
   </div>
   <div class="button-row">
     <button *ngIf="mode=='edit'" mat-button (click)="switchMode('visualize')">
@@ -22,15 +23,15 @@
 
       <defs>
           <style>
-            {{b64Fonts}}
+            {{b64.fonts}}
           </style>
       </defs>
       
       <g [ngClass]="mode">
         
-      <image *ngIf="b64Bg" attr.xlink:href="data:image/jpg;base64,{{b64Bg}}" height="1050" width="740"/>
+      <image *ngIf="b64.bg" attr.xlink:href="data:image/jpg;base64,{{b64.bg}}" height="1050" width="740"/>
       
-      <image *ngIf="b64Frise" attr.xlink:href="data:image/jpg;base64,{{b64Frise}}" height="1050" width="740"/>
+      <image *ngIf="b64.frise" attr.xlink:href="data:image/jpg;base64,{{b64.frise}}" height="1050" width="740"/>
 
       <text class="number" x="91%" y="85px" text-anchor="end"
         font-family="'Bodoni Moda', serif" font-size="17" opacity="0.75" fill="#2e1900">N° 10.</text>
