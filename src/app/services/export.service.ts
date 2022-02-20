@@ -11,9 +11,12 @@ export class ExportService {
   constructor() { }
 
   saveAsPng(svgElement: SVGGraphicsElement) {
-    this.exportPNGRunning = true;
-    this.exportPNG(svgElement, () => {
-      this.exportPNGRunning = false;
+    return new Promise((resolve) => {
+      this.exportPNGRunning = true;
+      this.exportPNG(svgElement, () => {
+        this.exportPNGRunning = false;
+        resolve(true);
+      });
     });
   }
 

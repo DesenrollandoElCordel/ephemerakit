@@ -6,7 +6,7 @@
       <div class="sk-cube4 sk-cube"></div>
       <div class="sk-cube3 sk-cube"></div>
     </div>
-    <div class="percent">Préchargement<br />{{b64.getPercents()}}%</div>
+    <div *ngIf="displayPercents" class="percent">Préchargement<br />{{b64.getPercents()}}%</div>
   </div>
   <div class="button-row">
     <button *ngIf="mode=='edit'" mat-button (click)="switchMode('visualize')">

@@ -25,7 +25,8 @@ export class HomeComponent implements OnInit {
   );
   pngImages: any[] = [];
   loaded: string[] = [];
-  displayLoader: boolean;
+  displayLoader: boolean = false;
+  displayPercents: boolean = false;
   editmode: string = "none";
   @ViewChild('pliegoSVG', { static: false }) svg: any;
   @ViewChild('canvas', { static: false }) canvas: any;
@@ -34,15 +35,15 @@ export class HomeComponent implements OnInit {
     public b64: Base64Service,
     private exportService: ExportService,
     private bottomSheet: MatBottomSheet
-  ) {
-    this.displayLoader = false;
-  }
+  ) { }
 
   ngOnInit(): void {
     this.displayLoader = true;
+    this.displayPercents = true;
     this.b64.loadData().then(() => {
       this.updateFigures();
       this.displayLoader = false;
+      this.displayPercents = false;
     });
   }
 
@@ -59,7 +60,11 @@ export class HomeComponent implements OnInit {
   }
 
   async savePNG() {
-    this.exportService.saveAsPng(this.svg.nativeElement);
+    this.displayLoader = true;
+    this.displayPercents = false;
+    this.exportService.saveAsPng(this.svg.nativeElement).then(() => {
+      this.displayLoader = false;
+    });
   }
 
   updateFigures() {
