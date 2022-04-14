@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BottomSheetComponent } from '../../bottom-sheet/bottom-sheet.component';
+import { GlobalVariables } from '../../commons/global-variables';
 
 import { Base64Service } from '../../services/base64.service';
 import { ExportService } from '../../services/export.service';
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
   constructor(
     public b64: Base64Service,
     private exportService: ExportService,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
   ) { }
 
   ngOnInit(): void {
