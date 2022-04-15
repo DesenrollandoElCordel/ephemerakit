@@ -11,6 +11,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $app = AppFactory::create();
 
 $app->addBodyParsingMiddleware();
+$app->addRoutingMiddleware();
 
 $app->post('/', function (Request $request, Response $response, $args) {
   
@@ -25,11 +26,10 @@ $app->post('/', function (Request $request, Response $response, $args) {
     file_put_contents('../archives/'.$filename.'.json', json_encode($body['pliego']));
     
     $response->getBody()->write(json_encode($body['pliego']));
-    
-    return $response->withHeader('Content-type', 'application/json')
-      ->withHeader('Access-Control-Allow-Origin', '*')
-      ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-      ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+
+    return $response->withHeader('Content-type', 'application/json');
 });
+
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 $app->run();

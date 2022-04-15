@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Canvg } from 'canvg';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { GlobalVariables } from '../commons/global-variables';
 import { Pliego } from '../models/pliego';
 
@@ -49,8 +49,7 @@ export class ExportService {
   postDataURL(data: string): Observable<any> {
     return this.http.post<string>(this.appPrinterURL, data, httpOptions).pipe(
       catchError((err) => {
-        console.error(err.message);
-        return throwError(err);
+        return this.handleError(err);
       })
     );
   }
@@ -70,6 +69,9 @@ export class ExportService {
   async exportCanvas(svgElement: SVGGraphicsElement, callback: any) {
     let { width, height } = svgElement.getBBox();
     let clonedSvgElement = svgElement.cloneNode(true);
+    if (this.appType) {
+      (clonedSvgElement as Element).querySelector("#bgImg")!.remove();
+    }
     let svgString = new XMLSerializer().serializeToString(clonedSvgElement);
     const canvas: HTMLCanvasElement = document.createElement('canvas');
     canvas.width = width;
@@ -84,8 +86,7 @@ export class ExportService {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);
     } else {
-      console.error(
-        'Backend returned code ${error.status}, body was: ', error.error);
+      console.error('Backend returned code ${error.status}, body was: ', error.error);
     }
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }

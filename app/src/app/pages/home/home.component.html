@@ -31,7 +31,7 @@
       
       <g [ngClass]="mode">
         
-      <image *ngIf="b64.bg" attr.xlink:href="data:image/jpg;base64,{{b64.bg}}" height="1050" width="740"/>
+      <image id="bgImg" *ngIf="b64.bg" attr.xlink:href="data:image/jpg;base64,{{b64.bg}}" height="1050" width="740"/>
       
       <image *ngIf="b64.frise" attr.xlink:href="data:image/jpg;base64,{{b64.frise}}" height="1050" width="740"/>
 
