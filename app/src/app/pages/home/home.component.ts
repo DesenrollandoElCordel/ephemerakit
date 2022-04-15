@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   displayLoader: boolean = false;
   displayPercents: boolean = false;
   editmode: string = "none";
+  appType: string = GlobalVariables.appType;
   @ViewChild('pliegoSVG', { static: false }) svg: any;
   @ViewChild('canvas', { static: false }) canvas: any;
 
@@ -64,6 +65,14 @@ export class HomeComponent implements OnInit {
     this.displayLoader = true;
     this.displayPercents = false;
     this.exportService.saveAsPng(this.svg.nativeElement).then(() => {
+      this.displayLoader = false;
+    });
+  }
+
+  async printImage() {
+    this.displayLoader = true;
+    this.displayPercents = false;
+    this.exportService.exportAsDataURL(this.svg.nativeElement).then(() => {
       this.displayLoader = false;
     });
   }

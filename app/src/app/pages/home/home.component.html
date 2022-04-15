@@ -15,8 +15,10 @@
         <mat-icon>shuffle</mat-icon> Figures au hasard</button>
     <button *ngIf="mode=='visualize'" mat-button (click)="switchMode('edit')">
       <mat-icon>edit</mat-icon> Modifier</button>
-    <button *ngIf="mode=='visualize'" mat-button (click)="savePNG()">
+    <button *ngIf="mode=='visualize' && appType=='default'" mat-button (click)="savePNG()">
       <mat-icon>download</mat-icon> Télécharger</button>
+    <button *ngIf="mode=='visualize' && appType=='print'" mat-button (click)="printImage()">
+        <mat-icon>print</mat-icon> Imprimer</button>
   </div>
   <div class="pliego-container">
     <svg version="1.1" baseProfile="full" viewBox="0 0 740 1050" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" #pliegoSVG>
