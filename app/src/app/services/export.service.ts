@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { GlobalVariables } from '../commons/global-variables';
+import { Pliego } from '../models/pliego';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -32,11 +33,11 @@ export class ExportService {
     });
   }
 
-  exportAsDataURL(svgElement: SVGGraphicsElement) {
+  exportAsDataURL(svgElement: SVGGraphicsElement, pliego: Pliego) {
     return new Promise((resolve) => {
       this.exportRunning = true;
       this.exportCanvas(svgElement, (canvas: HTMLCanvasElement) => {
-        let data: string = JSON.stringify({ image: canvas.toDataURL() });
+        let data: string = JSON.stringify({ pliego: pliego, image: canvas.toDataURL() });
         this.postDataURL(data).subscribe(() => {
           this.exportRunning = false;
           resolve(true);

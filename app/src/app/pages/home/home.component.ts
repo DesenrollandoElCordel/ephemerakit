@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
   async printImage() {
     this.displayLoader = true;
     this.displayPercents = false;
-    this.exportService.exportAsDataURL(this.svg.nativeElement).then(() => {
+    this.exportService.exportAsDataURL(this.svg.nativeElement, this.pliego).then(() => {
       this.displayLoader = false;
     });
   }
