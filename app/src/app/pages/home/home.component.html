@@ -9,15 +9,15 @@
     <div *ngIf="displayPercents" class="percent">Préchargement<br />{{b64.getPercents()}}%</div>
   </div>
   <div class="button-row">
-    <button *ngIf="mode=='edit'" mat-button (click)="switchMode('visualize')">
+    <button *ngIf="mode=='edit'" mat-button (click)="switchMode('visualize')" [disabled]="displayLoader">
       <mat-icon>visibility</mat-icon> Visualiser</button>
-    <button *ngIf="mode=='edit'" mat-button (click)="randomFigures()">
+    <button *ngIf="mode=='edit'" mat-button (click)="randomFigures()" [disabled]="displayLoader">
         <mat-icon>shuffle</mat-icon> Figures au hasard</button>
-    <button *ngIf="mode=='visualize'" mat-button (click)="switchMode('edit')">
+    <button *ngIf="mode=='visualize'" mat-button (click)="switchMode('edit')" [disabled]="displayLoader">
       <mat-icon>edit</mat-icon> Modifier</button>
-    <button *ngIf="mode=='visualize' && appType=='default'" mat-button (click)="savePNG()">
+    <button *ngIf="mode=='visualize' && appType=='default'" mat-button (click)="savePNG()" [disabled]="displayLoader">
       <mat-icon>download</mat-icon> Télécharger</button>
-    <button *ngIf="mode=='visualize' && appType=='print'" mat-button (click)="printImage()">
+    <button *ngIf="mode=='visualize' && appType=='print'" mat-button (click)="printImage()" [disabled]="displayLoader">
         <mat-icon>print</mat-icon> Imprimer</button>
   </div>
   <div class="pliego-container">
