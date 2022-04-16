@@ -81,7 +81,7 @@
       </g>
       
       <g [ngStyle]="{'display': editmode}">
-        <g style="cursor: pointer;" (click)="changeImage(0,'up')">
+        <g class="tap" style="cursor: pointer;" (click)="changeImage(0,'up')">
             <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
                 <circle cx="254.79" cy="154.74" r="45" style="fill:rgb(162,42,44);"/>
             </g>
@@ -90,7 +90,7 @@
             </g>
             <rect x="72" y="66" width="180" height="200" fill="#ffff" opacity="0" />
         </g>
-        <g transform="matrix(1,0,0,1,203,0)" style="cursor: pointer;" (click)="changeImage(1,'up')">
+        <g class="tap" transform="matrix(1,0,0,1,203,0)" style="cursor: pointer;" (click)="changeImage(1,'up')">
             <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
                 <circle cx="254.79" cy="154.74" r="45" style="fill:rgb(162,42,44);"/>
             </g>
@@ -99,7 +99,7 @@
             </g>
             <rect x="72" y="66" width="180" height="200" fill="#ffff" opacity="0" />
         </g>
-        <g transform="matrix(1,0,0,1,410,0)" style="cursor: pointer;" (click)="changeImage(2,'up')">
+        <g class="tap" transform="matrix(1,0,0,1,410,0)" style="cursor: pointer;" (click)="changeImage(2,'up')">
             <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
                 <circle cx="254.79" cy="154.74" r="45" style="fill:rgb(162,42,44);"/>
             </g>
@@ -108,7 +108,7 @@
             </g>
             <rect x="72" y="66" width="180" height="200" fill="#ffff" opacity="0" />
         </g>
-        <g transform="matrix(1,0,0,-1,0,588.426)" style="cursor: pointer;" (click)="changeImage(0,'down')">
+        <g class="tap" transform="matrix(1,0,0,-1,0,588.426)" style="cursor: pointer;" (click)="changeImage(0,'down')">
             <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
                 <circle cx="254.79" cy="154.74" r="45" style="fill:rgb(162,42,44);"/>
             </g>
@@ -117,7 +117,7 @@
             </g>
             <rect x="72" y="66" width="180" height="200" fill="#ffff" opacity="0" />
         </g>
-        <g transform="matrix(1,0,0,-1,203,588.426)" style="cursor: pointer;" (click)="changeImage(1,'down')">
+        <g class="tap" transform="matrix(1,0,0,-1,203,588.426)" style="cursor: pointer;" (click)="changeImage(1,'down')">
             <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
                 <circle cx="254.79" cy="154.74" r="45" style="fill:rgb(162,42,44);"/>
             </g>
@@ -126,7 +126,7 @@
             </g>
             <rect x="72" y="66" width="180" height="200" fill="#ffff" opacity="0" />
         </g>
-        <g transform="matrix(1,0,0,-1,410,588.426)" style="cursor: pointer;" (click)="changeImage(2,'down')">
+        <g class="tap" transform="matrix(1,0,0,-1,410,588.426)" style="cursor: pointer;" (click)="changeImage(2,'down')">
             <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
                 <circle cx="254.79" cy="154.74" r="45" style="fill:rgb(162,42,44);"/>
             </g>
@@ -135,31 +135,31 @@
             </g>
             <rect x="72" y="66" width="180" height="200" fill="#ffff" opacity="0" />
         </g>
-        <g style="cursor: pointer;" (click)="openBottomSheet('line1')">
+        <g class="tap" style="cursor: pointer;" (click)="openBottomSheet('line1')">
           <circle cx="680" cy="555" r="25" style="fill:rgb(162,42,44)"/>
           <text class="number" x="680" y="565" text-anchor="middle"
             font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bold" fill="#FFFFFF">1</text>
           <rect x="72" y="527" width="596" height="50" fill="#ffff" opacity="0" />
         </g>
-        <g style="cursor: pointer;" (click)="openBottomSheet('line2')">
+        <g class="tap" style="cursor: pointer;" (click)="openBottomSheet('line2')">
           <circle cx="700" cy="607" r="25" style="fill:rgb(162,42,44)"/>
           <text class="number" x="700" y="617" text-anchor="middle"
             font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bold" fill="#FFFFFF">2</text>
           <rect x="72" y="580" width="596" height="37" fill="#ffff" opacity="0" />
         </g>
-        <g style="cursor: pointer;" (click)="openBottomSheet('line3')">
+        <g class="tap" style="cursor: pointer;" (click)="openBottomSheet('line3')">
           <circle cx="680" cy="660" r="25" style="fill:rgb(162,42,44)"/>
           <text class="number" x="680" y="670" text-anchor="middle"
             font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bold" fill="#FFFFFF">3</text>
           <rect x="72" y="625" width="596" height="56" fill="#ffff" opacity="0" />
         </g>
-        <g style="cursor: pointer;" (click)="openBottomSheet('line4')">
+        <g class="tap" style="cursor: pointer;" (click)="openBottomSheet('line4')">
           <circle cx="700" cy="715" r="25" style="fill:rgb(162,42,44)"/>
           <text class="number" x="698" y="725" text-anchor="middle"
             font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bold" fill="#FFFFFF">4</text>
           <rect x="72" y="692" width="596" height="40" fill="#ffff" opacity="0" />
         </g>
-        <g style="cursor: pointer;" (click)="openBottomSheet('printer')">
+        <g class="tap" style="cursor: pointer;" (click)="openBottomSheet('printer')">
           <circle cx="310" cy="822" r="25" style="fill:rgb(162,42,44)"/>
           <text class="number" x="310" y="832" text-anchor="middle"
             font-family="'Bodoni Moda', serif" font-size="2em" font-weight="bold" fill="#FFFFFF">5</text>

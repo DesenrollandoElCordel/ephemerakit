@@ -50,7 +50,12 @@ mat-form-field {
   }
 
   .pliego-container {
-    // background-image: url("../../../assets/bg.jpg");
+    svg{
+      g.tap{
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        -webkit-tap-highlight-color: transparent;
+      }
+    }
   }
 }
 
