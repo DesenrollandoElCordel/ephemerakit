@@ -1,0 +1,10 @@
+{
+  "cups": {
+    "lp" :{
+      "options" :{
+        "d" : ["printer_name"],
+        "o" : ["portrait","fit-to-page","media=A5"]
+      }
+    }
+  }
+}
