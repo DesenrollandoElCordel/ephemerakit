@@ -13,11 +13,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatDialogModule } from '@angular/material/dialog';
 
+
+import { environment } from '../environments/environment';
 import { HomeComponent } from './pages/home/home.component';
 import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
   imports: [
@@ -33,6 +36,7 @@ import { environment } from '../environments/environment';
     MatInputModule,
     MatSelectModule,
     MatBottomSheetModule,
+    MatDialogModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
@@ -43,7 +47,8 @@ import { environment } from '../environments/environment';
   declarations: [
     AppComponent,
     HomeComponent,
-    BottomSheetComponent
+    BottomSheetComponent,
+    DialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

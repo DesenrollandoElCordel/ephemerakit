@@ -6,6 +6,9 @@ import { GlobalVariables } from '../../commons/global-variables';
 import { Base64Service } from '../../services/base64.service';
 import { ExportService } from '../../services/export.service';
 
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../components/dialog/dialog.component';
+
 import { Pliego } from '../../models/pliego';
 
 @Component({
@@ -37,6 +40,7 @@ export class HomeComponent implements OnInit {
     public b64: Base64Service,
     private exportService: ExportService,
     private bottomSheet: MatBottomSheet,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -72,8 +76,14 @@ export class HomeComponent implements OnInit {
   async printImage() {
     this.displayLoader = true;
     this.displayPercents = false;
-    this.exportService.exportAsDataURL(this.svg.nativeElement, this.pliego).then(() => {
+    this.exportService.exportAsDataURL(this.svg.nativeElement, this.pliego).then((response: any) => {
       this.displayLoader = false;
+      if (response.retval !== 0) {
+        this.openCompDialog(
+          "Erreur lors de l'impression",
+          response.output.join("\n")
+        );
+      }
     });
   }
 
@@ -158,5 +168,12 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  openCompDialog(title: string, message: string) {
+    this.dialog.open(DialogComponent, {
+      data: { title: title, message: message }
+    });
+  }
+
 
 }

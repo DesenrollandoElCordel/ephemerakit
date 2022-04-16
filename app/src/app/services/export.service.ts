@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Canvg } from 'canvg';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { GlobalVariables } from '../commons/global-variables';
 import { Pliego } from '../models/pliego';
@@ -38,20 +38,21 @@ export class ExportService {
       this.exportRunning = true;
       this.exportCanvas(svgElement, (canvas: HTMLCanvasElement) => {
         let data: string = JSON.stringify({ pliego: pliego, image: canvas.toDataURL() });
-        this.postDataURL(data).subscribe(() => {
+        this.postDataURL(data).subscribe((response) => {
           this.exportRunning = false;
-          resolve(true);
+          resolve(response);
+        }, (error) => {
+          resolve({
+            output: [error.message],
+            retval: 1
+          });
         });
       });
     });
   }
 
   postDataURL(data: string): Observable<any> {
-    return this.http.post<string>(this.appPrinterURL, data, httpOptions).pipe(
-      catchError((err) => {
-        return this.handleError(err);
-      })
-    );
+    return this.http.post(this.appPrinterURL, data, httpOptions);
   }
 
   exportPNG(svgElement: SVGGraphicsElement, callback: any) {
@@ -80,15 +81,6 @@ export class ExportService {
     const v = Canvg.fromString(ctx, svgString);
     await v.render();
     callback(canvas);
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      console.error('An error occurred:', error.error);
-    } else {
-      console.error('Backend returned code ${error.status}, body was: ', error.error);
-    }
-    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
 }
