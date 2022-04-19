@@ -22,6 +22,7 @@ import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 import { SettingsFormComponent } from './components/settings-form/settings-form.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { HelpComponent } from './components/help/help.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     HomeComponent,
     BottomSheetComponent,
     DialogComponent,
-    SettingsFormComponent
+    SettingsFormComponent,
+    HelpComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

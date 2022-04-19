@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { HelpComponent } from './components/help/help.component';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'ephemerakit';
+
+  constructor(
+    public dialog: MatDialog
+  ) { }
+
+  openHelpDialog() {
+    this.dialog.open(HelpComponent);
+  }
+
 }
