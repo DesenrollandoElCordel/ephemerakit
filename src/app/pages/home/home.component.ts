@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BottomSheetComponent } from '../../bottom-sheet/bottom-sheet.component';
-import { GlobalVariables } from '../../commons/global-variables';
-
+import { environment } from '../../../environments/environment';
 import { Base64Service } from '../../services/base64.service';
 import { ExportService } from '../../services/export.service';
 
@@ -32,7 +31,7 @@ export class HomeComponent implements OnInit {
   displayLoader: boolean = false;
   displayPercents: boolean = false;
   editmode: string = "none";
-  appType: string = GlobalVariables.appType;
+  appType: string = environment.appType;
   @ViewChild('pliegoSVG', { static: false }) svg: any;
   @ViewChild('canvas', { static: false }) canvas: any;
 

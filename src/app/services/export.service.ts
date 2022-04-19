@@ -3,7 +3,7 @@ import { Canvg } from 'canvg';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { GlobalVariables } from '../commons/global-variables';
+import { environment } from '../../environments/environment';
 import { Pliego } from '../models/pliego';
 
 const httpOptions = {
@@ -18,8 +18,8 @@ const httpOptions = {
 export class ExportService {
 
   public exportRunning: boolean = false;
-  private appType: string = GlobalVariables.appType;
-  private appPrinterURL: string = GlobalVariables.appPrinterURL;
+  private appType: string = environment.appType;
+  private appPrinterURL: string = environment.appPrinterURL;
 
   constructor(private http: HttpClient) { }
 
