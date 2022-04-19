@@ -7,6 +7,7 @@ import { ExportService } from '../../services/export.service';
 
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../components/dialog/dialog.component';
+import { SettingsFormComponent } from '../../components/settings-form/settings-form.component';
 
 import { Pliego } from '../../models/pliego';
 
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit {
   loaded: string[] = [];
   displayLoader: boolean = false;
   displayPercents: boolean = false;
-  editmode: string = "none";
+  editmode: boolean = false;
   appType: string = environment.appType;
   @ViewChild('pliegoSVG', { static: false }) svg: any;
   @ViewChild('canvas', { static: false }) canvas: any;
@@ -56,10 +57,10 @@ export class HomeComponent implements OnInit {
     this.mode = mode;
     switch (this.mode) {
       case 'edit':
-        this.editmode = "block";
+        this.editmode = true;
         break;
       default:
-        this.editmode = "none";
+        this.editmode = false;
         break;
     }
   }
@@ -174,5 +175,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  activeSettingsForm(): boolean {
+    return !this.editmode && this.appType == 'print' &&
+      this.pliego.images[0] == this.pliego.images[1] && this.pliego.images[1] == this.pliego.images[2];
+  }
+
+  settingsForm() {
+    if (this.activeSettingsForm()) {
+      this.dialog.open(SettingsFormComponent);
+    }
+  }
 
 }

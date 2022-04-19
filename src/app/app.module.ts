@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { environment } from '../environments/environment';
 import { HomeComponent } from './pages/home/home.component';
 import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
+import { SettingsFormComponent } from './components/settings-form/settings-form.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { DialogComponent } from './components/dialog/dialog.component';
 
@@ -27,6 +28,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -48,7 +50,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     AppComponent,
     HomeComponent,
     BottomSheetComponent,
-    DialogComponent
+    DialogComponent,
+    SettingsFormComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

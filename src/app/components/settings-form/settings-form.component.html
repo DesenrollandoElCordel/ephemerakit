@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Settings</h1>
+<form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Printer URL</mat-label>
+    <input matInput formControlName="printerURL">
+    <mat-hint align="end">https://###.###.##.#/</mat-hint>
+  </mat-form-field>
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="closeSettingsForm()">Save and Close</button>
+  </div>
+</form>

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Canvg } from 'canvg';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, EMPTY } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Pliego } from '../models/pliego';
+import { SettingsService } from '../services/settings.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,9 +19,14 @@ export class ExportService {
 
   public exportRunning: boolean = false;
   private appType: string = environment.appType;
-  private appPrinterURL: string = environment.appPrinterURL;
+  private appPrinterURL: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private settings: SettingsService
+  ) {
+    this.appPrinterURL = this.settings.getItem('printerURL');
+  }
 
   saveAsPng(svgElement: SVGGraphicsElement) {
     return new Promise((resolve) => {

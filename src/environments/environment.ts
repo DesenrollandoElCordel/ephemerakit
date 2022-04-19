@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  appType: "default", // "default/print"
-  appPrinterURL: "http://localhost:8000/"
+  appType: "default" // "default/print"
 };
 
 /*

@@ -80,7 +80,7 @@
         [attr.y]="pngImages[2].y"/>
       </g>
       
-      <g [ngStyle]="{'display': editmode}">
+      <g [ngStyle]="editmode ? {'display': 'block'} : {'display': 'none'}">
         <g class="tap" style="cursor: pointer;" (click)="changeImage(0,'up')">
             <g transform="matrix(0.511107,0,0,0.511107,36.7748,28.6246)">
                 <circle cx="254.79" cy="154.74" r="45" style="fill:rgb(162,42,44);"/>
@@ -166,7 +166,9 @@
           <rect x="155" y="845" width="430" height="64" fill="#ffff" opacity="0" />
         </g>
       </g>
-      
+      <g class="tap" *ngIf="activeSettingsForm()" (click)="settingsForm()">
+        <circle cx="700" cy="1010" r="30" opacity="0"/>
+      </g>
     </svg>
   </div>
 </div>
