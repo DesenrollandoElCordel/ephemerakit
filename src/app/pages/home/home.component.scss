@@ -146,3 +146,14 @@ mat-form-field {
     opacity: 0; 
   }
 }
+
+/* iPad Air Portrait */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .main {
+      max-width: 740px;
+    }
+}
