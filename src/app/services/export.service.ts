@@ -8,7 +8,8 @@ import { SettingsService } from '../services/settings.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'ngsw-bypass': 'true'
   })
 };
 
@@ -24,9 +25,7 @@ export class ExportService {
   constructor(
     private http: HttpClient,
     private settings: SettingsService
-  ) {
-    this.appPrinterURL = this.settings.getItem('printerURL');
-  }
+  ) { }
 
   saveAsPng(svgElement: SVGGraphicsElement) {
     return new Promise((resolve) => {
@@ -57,7 +56,7 @@ export class ExportService {
   }
 
   postDataURL(data: string): Observable<any> {
-    return this.http.post(this.appPrinterURL, data, httpOptions);
+    return this.http.post(this.settings.getItem('printerURL'), data, httpOptions);
   }
 
   exportPNG(svgElement: SVGGraphicsElement, callback: any) {
