@@ -75,6 +75,12 @@ export class ExportService {
     let clonedSvgElement = svgElement.cloneNode(true);
     if (this.appType == 'print') {
       (clonedSvgElement as Element).querySelector("#bgImg")!.remove();
+      (clonedSvgElement as Element).querySelector("#title-1")!.setAttribute('opacity', '1');
+      (clonedSvgElement as Element).querySelector("#title-2")!.setAttribute('opacity', '1');
+      (clonedSvgElement as Element).querySelector("#title-3")!.setAttribute('opacity', '1');
+      (clonedSvgElement as Element).querySelector("#title-4")!.setAttribute('opacity', '1');
+      (clonedSvgElement as Element).querySelector("#license")!.setAttribute('opacity', '1');
+      (clonedSvgElement as Element).querySelector("#number")!.setAttribute('opacity', '1');
     }
     let svgString = new XMLSerializer().serializeToString(clonedSvgElement);
     const canvas: HTMLCanvasElement = document.createElement('canvas');
