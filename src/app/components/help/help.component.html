@@ -1,24 +1,15 @@
-<h1 mat-dialog-title>l'Ephemera Kit</h1>
+<h1 mat-dialog-title>Aide de l'Ephemera Kit</h1>
 <div mat-dialog-content>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta tempor luctus. Curabitur aliquam fringilla justo, fermentum dignissim leo tempor vitae. Nam rhoncus posuere interdum. Morbi pretium id libero sit amet dictum. Suspendisse
-    tempus et leo in tempor. Etiam eget sapien pharetra, mattis arcu nec, molestie augue. Suspendisse lacinia sed diam id accumsan. Nam lacus ipsum, dictum at magna eget, fringilla pretium nulla. Curabitur est nunc, aliquet in consequat at, placerat
-    eu libero. Aliquam pulvinar eu lorem eu aliquam. Aliquam cursus nisi eu arcu eleifend mattis. Cras mollis felis pretium elit tristique congue. Nam pharetra porttitor consequat. Morbi molestie mauris vel eros pharetra posuere. Aliquam vestibulum
-    turpis tempor vehicula tempor. Nulla posuere turpis sed lorem pharetra, quis elementum nisl vehicula.</p>
-
-  <p>Cras tristique eros vel augue convallis iaculis. Sed et felis libero. Pellentesque consequat, metus eget hendrerit molestie, lacus quam venenatis lectus, a cursus arcu nisi id risus. Nunc vitae euismod nisl, at scelerisque leo. Pellentesque
-    iaculis ut eros ut pulvinar. Integer vulputate id velit nec ornare. Integer feugiat purus ut massa sollicitudin, vehicula porttitor neque tempor. Aenean condimentum ex in consequat tincidunt. Pellentesque tempor gravida nibh sed pretium.</p>
-
-  <p>Proin vitae eros eu mi scelerisque ultricies. Nullam enim erat, commodo in turpis faucibus, dictum scelerisque dui. Morbi cursus odio ut luctus volutpat. Duis finibus ex mauris, dignissim iaculis purus elementum nec. Aliquam erat volutpat. Ut
-    tincidunt lectus tincidunt pretium ullamcorper. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Proin egestas ullamcorper dui, a varius nibh dignissim eget. Fusce pretium arcu eget turpis congue maximus. Phasellus suscipit
-    ultricies ante in ornare. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer dapibus diam a risus ultrices pretium. Morbi commodo interdum eros, ac vulputate massa aliquam ut.</p>
-
-  <p>Etiam sed cursus massa, non imperdiet mi. Sed semper massa a eros varius, a convallis est posuere. Duis porttitor libero id orci viverra, ut sodales tellus maximus. Nunc sit amet congue urna. Vivamus bibendum ornare urna, a imperdiet tortor
-    feugiat eu. Nullam pretium sapien nisi. Curabitur semper imperdiet urna. Curabitur sodales tortor non elit congue, posuere porttitor arcu imperdiet. Vivamus leo dui, luctus at ante id, sollicitudin mattis dui. Nulla vulputate molestie nibh id
-    vehicula.</p>
-
-  <p>Morbi eget ante blandit, sollicitudin sem ac, sollicitudin nunc. Mauris porta aliquet lectus eget lobortis. Etiam rutrum, velit et imperdiet aliquam, odio risus volutpat arcu, quis ultricies sapien est eu quam. Mauris id nisl congue turpis
-    rutrum dignissim quis sed justo. Suspendisse potenti. Sed eget commodo enim. Duis pellentesque libero vel tortor iaculis, ornare laoreet ipsum mollis. Fusce non venenatis mi. Quisque consectetur eget orci a commodo. Aenean egestas faucibus lorem
-    in dignissim. Donec ipsum tortor, iaculis at lobortis vel, pulvinar vel eros.</p>
+  <p><strong>Pour personnaliser votre imprimé éphémère :</strong></p>
+  <ul>
+    <li>Appuyez sur le bouton <strong>"Modifier"</strong>.</li>
+    <li>Appuyez sur les flèches au-dessus ou au-dessous des images pour choisir les gravures qui composeront votre scène, ou faites confiance au hasard en appuyant sur <strong>"Figures au hasard"</strong>.</li>
+    <li>Sélectionnez la ligne de texte à modifier en cliquant dessus et donnez un titre à votre histoire.</li>
+    <li>Enfin, inscrivez votre nom en bas de page en lieu et place du nom de l'imprimeur.</li>
+    <li>Pour visualiser le résultat final, appuyez sur <strong>"Visualiser"</strong>.</li>
+    <li *ngIf="appType=='print'">Vous êtes satisfait-e? Appuyez sur <strong>"Imprimer"</strong> !</li>
+    <li *ngIf="appType=='default'">Vous êtes satisfait-e? Appuyez sur <strong>"Télécharger"</strong> !</li>
+  </ul>  
 </div>
 <div mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Fermer</button>
