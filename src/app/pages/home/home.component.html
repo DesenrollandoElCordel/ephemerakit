@@ -17,7 +17,7 @@
       <mat-icon>edit</mat-icon> Modifier</button>
     <button *ngIf="mode=='visualize' && appType=='default'" mat-button (click)="savePNG()" [disabled]="displayLoader">
       <mat-icon>download</mat-icon> Télécharger</button>
-    <button *ngIf="mode=='visualize' && appType=='print'" mat-button (click)="printImage()" [disabled]="displayLoader">
+    <button *ngIf="mode=='visualize' && appType=='print'" mat-button (click)="confirmPrintImage()" [disabled]="displayLoader">
         <mat-icon>print</mat-icon> Imprimer</button>
   </div>
   <div class="pliego-container">

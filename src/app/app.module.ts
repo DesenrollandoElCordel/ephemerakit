@@ -23,6 +23,7 @@ import { SettingsFormComponent } from './components/settings-form/settings-form.
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { HelpComponent } from './components/help/help.component';
+import { ConfirmPrintComponent } from './components/confirm-print/confirm-print.component';
 
 @NgModule({
   imports: [
@@ -53,7 +54,8 @@ import { HelpComponent } from './components/help/help.component';
     BottomSheetComponent,
     DialogComponent,
     SettingsFormComponent,
-    HelpComponent
+    HelpComponent,
+    ConfirmPrintComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

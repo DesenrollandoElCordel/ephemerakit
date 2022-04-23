@@ -7,6 +7,7 @@ import { ExportService } from '../../services/export.service';
 
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../components/dialog/dialog.component';
+import { ConfirmPrintComponent } from '../../components/confirm-print/confirm-print.component';
 import { SettingsFormComponent } from '../../components/settings-form/settings-form.component';
 
 import { Pliego } from '../../models/pliego';
@@ -41,6 +42,7 @@ export class HomeComponent implements OnInit {
     private exportService: ExportService,
     private bottomSheet: MatBottomSheet,
     public dialog: MatDialog,
+    public confirmPrintDialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -184,6 +186,17 @@ export class HomeComponent implements OnInit {
     if (this.activeSettingsForm()) {
       this.dialog.open(SettingsFormComponent);
     }
+  }
+
+  confirmPrintImage() {
+    const confirmPrintDialogRef = this.confirmPrintDialog.open(ConfirmPrintComponent, {
+      data: {}
+    });
+    confirmPrintDialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.printImage();
+      }
+    });
   }
 
 }
