@@ -20,7 +20,6 @@ export class ExportService {
 
   public exportRunning: boolean = false;
   private appType: string = environment.appType;
-  private appPrinterURL: string = '';
 
   constructor(
     private http: HttpClient,
@@ -74,7 +73,7 @@ export class ExportService {
   async exportCanvas(svgElement: SVGGraphicsElement, callback: any) {
     let { width, height } = svgElement.getBBox();
     let clonedSvgElement = svgElement.cloneNode(true);
-    if (this.appType) {
+    if (this.appType == 'print') {
       (clonedSvgElement as Element).querySelector("#bgImg")!.remove();
     }
     let svgString = new XMLSerializer().serializeToString(clonedSvgElement);
