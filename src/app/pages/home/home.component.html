@@ -19,6 +19,8 @@
       <mat-icon>download</mat-icon> Télécharger</button>
     <button *ngIf="mode=='visualize' && appType=='print'" mat-button (click)="confirmPrintImage()" [disabled]="displayLoader">
         <mat-icon>print</mat-icon> Imprimer</button>
+    <button *ngIf="mode=='edit' && appType=='print'" mat-button (click)="reinitialize()" [disabled]="displayLoader">
+        <mat-icon>settings_backup_restore</mat-icon> Réinitialiser</button>
   </div>
   <div class="pliego-container">
     <svg version="1.1" baseProfile="full" viewBox="0 0 740 1050" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" #pliegoSVG>

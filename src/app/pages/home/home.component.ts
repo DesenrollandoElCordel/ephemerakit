@@ -199,4 +199,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  reinitialize() {
+    this.pliego.line1 = "VRAY DISCOURS";
+    this.pliego.line2 = "de la miraculeuse délivrance envoyée de Dieu";
+    this.pliego.line3 = "À LA VILLE DE GENÈVE";
+    this.pliego.line4 = "le 12, jour de décembre, 1602";
+    this.pliego.printer = "Georges";
+    this.pliego.images = ['tour', 'homme_epee_chapeau', 'femmes_groupe'];
+    this.updateFigures();
+  }
+
 }
