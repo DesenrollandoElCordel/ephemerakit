@@ -3,7 +3,7 @@
     "lp" :{
       "options" :{
         "d" : ["printer_name"],
-        "o" : ["portrait","fit-to-page","media=A5"]
+        "o" : ["portrait","fit-to-page","PageSize=A5.Borderless", "ColorModel=Gray", "cupsPrintQuality=High"]
       }
     }
   }
