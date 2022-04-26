@@ -229,7 +229,7 @@ export class HomeComponent implements OnInit {
     this.timeoutId = setTimeout(() => {
       this.switchMode('visualize');
       this.reinitialize();
-    },120000);
+    }, 120000);
   }
 
   @HostListener('window:keydown')
