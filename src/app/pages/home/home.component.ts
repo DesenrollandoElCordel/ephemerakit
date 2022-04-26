@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BottomSheetComponent } from '../../bottom-sheet/bottom-sheet.component';
 import { environment } from '../../../environments/environment';
 import { Base64Service } from '../../services/base64.service';
 import { ExportService } from '../../services/export.service';
+import { Subject } from 'rxjs';
 
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../components/dialog/dialog.component';
@@ -36,6 +37,8 @@ export class HomeComponent implements OnInit {
   appType: string = environment.appType;
   @ViewChild('pliegoSVG', { static: false }) svg: any;
   @ViewChild('canvas', { static: false }) canvas: any;
+  timeoutId: any;
+  userInactive: Subject<any> = new Subject();
 
   constructor(
     public b64: Base64Service,
@@ -43,7 +46,12 @@ export class HomeComponent implements OnInit {
     private bottomSheet: MatBottomSheet,
     public dialog: MatDialog,
     public confirmPrintDialog: MatDialog,
-  ) { }
+  ) {
+    this.checkTimeOut();
+    this.userInactive.subscribe((message) => {
+      alert(message);
+    });
+  }
 
   ngOnInit(): void {
     this.displayLoader = true;
@@ -209,4 +217,16 @@ export class HomeComponent implements OnInit {
     this.updateFigures();
   }
 
+  checkTimeOut() {
+    this.timeoutId = setTimeout(
+      () => this.reinitialize(), 120000
+    );
+  }
+
+  @HostListener('window:keydown')
+  @HostListener('window:mousedown')
+  checkUserActivity() {
+    clearTimeout(this.timeoutId);
+    this.checkTimeOut();
+  }
 }
