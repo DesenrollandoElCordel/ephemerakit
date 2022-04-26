@@ -18,15 +18,8 @@ export class AppComponent {
     public dialog: MatDialog
   ) { }
 
-  titleClick() {
-    if (this.appType == 'default') {
-      return;
-    }
-    this.clickCount++;
-    setTimeout(() => {
-      this.clickCount = 0;
-    }, 1000);
-    if (this.clickCount == 3) {
+  reload() {
+    if (this.appType == 'print') {
       window.location.reload();
     }
   }
