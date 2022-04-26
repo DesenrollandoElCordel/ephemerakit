@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
   loaded: string[] = [];
   displayLoader: boolean = false;
   displayPercents: boolean = false;
+  displayPrinting: boolean = false;
   editmode: boolean = false;
   appType: string = environment.appType;
   @ViewChild('pliegoSVG', { static: false }) svg: any;
@@ -85,14 +86,21 @@ export class HomeComponent implements OnInit {
 
   async printImage() {
     this.displayLoader = true;
+    this.displayPrinting = true;
     this.displayPercents = false;
     this.exportService.exportAsDataURL(this.svg.nativeElement, this.pliego).then((response: any) => {
-      this.displayLoader = false;
       if (response.retval !== 0) {
+        this.displayLoader = false;
+        this.displayPrinting = false;
         this.openCompDialog(
           "Erreur lors de l'impression",
           response.output.join("\n")
         );
+      } else {
+        setTimeout(() => {
+          this.displayLoader = false;
+          this.displayPrinting = false;
+        }, 15000);
       }
     });
   }
