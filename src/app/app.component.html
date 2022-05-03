@@ -1,8 +1,11 @@
 <mat-toolbar>
   <span (click)="reload()">Ephemera Kit</span>
   <span class="spacer"></span>
-  <button mat-icon-button aria-label="Help" (click)="openHelpDialog()">
-   <mat-icon>help</mat-icon>
- </button>
+  <button class="help" mat-icon-button aria-label="Help" (click)="openHelpDialog()">
+    <mat-icon>help</mat-icon>
+  </button>
+  <button class="help" mat-icon-button aria-label="Help" (click)="openHelpDialog()">
+    Aide
+  </button>
 </mat-toolbar>
 <router-outlet></router-outlet>
